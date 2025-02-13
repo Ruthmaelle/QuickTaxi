@@ -1,0 +1,20 @@
+# Git Ignore File
+# Exclure les fichiers inutiles de Visual Studio
+.vs/
+*.user
+*.suo
+*.cache
+*.vscode/
+
+# Exclure les fichiers générés (binaires, builds)
+bin/
+obj/
+*.dll
+*.exe
+
+# Exclure les fichiers de migration Entity Framework
+Migrations/
+
+# Exclure les fichiers de configuration sensibles
+appsettings.json
+appsettings.Development.json
