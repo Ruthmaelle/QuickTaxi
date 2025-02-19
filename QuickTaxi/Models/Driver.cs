@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace QuickTaxi.Models
@@ -6,18 +7,15 @@ namespace QuickTaxi.Models
     public class Driver
     {
         [Key]
-        public int Id { get; set; }
+        public Guid DriverId { get; set; }
 
         [ForeignKey("User")]
-        public int UserId { get; set; }
+        public string UserId { get; set; }
+        public User User { get; set; }
+
+        public decimal AverageRating { get; set; } = 0;
 
         [Required]
-        [MaxLength(50)]
-        public string LicenseNumber { get; set; }
-
-        public bool IsAvailable { get; set; } = true;
-
-        public virtual User User { get; set; }
-        public virtual ICollection<Vehicle> Vehicles { get; set; }
+        public string Status { get; set; } // Enum: "Available", "Busy", "Offline"
     }
 }

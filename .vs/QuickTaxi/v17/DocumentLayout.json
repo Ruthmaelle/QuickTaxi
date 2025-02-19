@@ -1,0 +1,591 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\User\\source\\repos\\QuickTaxi\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{A32A096C-942B-4BA3-84A1-9E88D9618F65}|QuickTaxi\\QuickTaxi.csproj|c:\\users\\user\\source\\repos\\quicktaxi\\quicktaxi\\.gitignore||{3B902123-F8A7-4915-9F01-361F908088D0}",
+      "RelativeMoniker": "D:0:0:{A32A096C-942B-4BA3-84A1-9E88D9618F65}|QuickTaxi\\QuickTaxi.csproj|solutionrelative:quicktaxi\\.gitignore||{3B902123-F8A7-4915-9F01-361F908088D0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A32A096C-942B-4BA3-84A1-9E88D9618F65}|QuickTaxi\\QuickTaxi.csproj|c:\\users\\user\\source\\repos\\quicktaxi\\quicktaxi\\controllers\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A32A096C-942B-4BA3-84A1-9E88D9618F65}|QuickTaxi\\QuickTaxi.csproj|solutionrelative:quicktaxi\\controllers\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A32A096C-942B-4BA3-84A1-9E88D9618F65}|QuickTaxi\\QuickTaxi.csproj|c:\\users\\user\\source\\repos\\quicktaxi\\quicktaxi\\models\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A32A096C-942B-4BA3-84A1-9E88D9618F65}|QuickTaxi\\QuickTaxi.csproj|solutionrelative:quicktaxi\\models\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A32A096C-942B-4BA3-84A1-9E88D9618F65}|QuickTaxi\\QuickTaxi.csproj|c:\\users\\user\\source\\repos\\quicktaxi\\quicktaxi\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{A32A096C-942B-4BA3-84A1-9E88D9618F65}|QuickTaxi\\QuickTaxi.csproj|solutionrelative:quicktaxi\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A32A096C-942B-4BA3-84A1-9E88D9618F65}|QuickTaxi\\QuickTaxi.csproj|c:\\users\\user\\source\\repos\\quicktaxi\\quicktaxi\\views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{A32A096C-942B-4BA3-84A1-9E88D9618F65}|QuickTaxi\\QuickTaxi.csproj|solutionrelative:quicktaxi\\views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A32A096C-942B-4BA3-84A1-9E88D9618F65}|QuickTaxi\\QuickTaxi.csproj|c:\\users\\user\\source\\repos\\quicktaxi\\quicktaxi\\viewmodels\\verifycodeviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A32A096C-942B-4BA3-84A1-9E88D9618F65}|QuickTaxi\\QuickTaxi.csproj|solutionrelative:quicktaxi\\viewmodels\\verifycodeviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A32A096C-942B-4BA3-84A1-9E88D9618F65}|QuickTaxi\\QuickTaxi.csproj|c:\\users\\user\\source\\repos\\quicktaxi\\quicktaxi\\views\\auth\\verifycode.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{A32A096C-942B-4BA3-84A1-9E88D9618F65}|QuickTaxi\\QuickTaxi.csproj|solutionrelative:quicktaxi\\views\\auth\\verifycode.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A32A096C-942B-4BA3-84A1-9E88D9618F65}|QuickTaxi\\QuickTaxi.csproj|c:\\users\\user\\source\\repos\\quicktaxi\\quicktaxi\\views\\auth\\register.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{A32A096C-942B-4BA3-84A1-9E88D9618F65}|QuickTaxi\\QuickTaxi.csproj|solutionrelative:quicktaxi\\views\\auth\\register.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A32A096C-942B-4BA3-84A1-9E88D9618F65}|QuickTaxi\\QuickTaxi.csproj|c:\\users\\user\\source\\repos\\quicktaxi\\quicktaxi\\viewmodels\\registerviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A32A096C-942B-4BA3-84A1-9E88D9618F65}|QuickTaxi\\QuickTaxi.csproj|solutionrelative:quicktaxi\\viewmodels\\registerviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A32A096C-942B-4BA3-84A1-9E88D9618F65}|QuickTaxi\\QuickTaxi.csproj|c:\\users\\user\\source\\repos\\quicktaxi\\quicktaxi\\views\\auth\\login.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{A32A096C-942B-4BA3-84A1-9E88D9618F65}|QuickTaxi\\QuickTaxi.csproj|solutionrelative:quicktaxi\\views\\auth\\login.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A32A096C-942B-4BA3-84A1-9E88D9618F65}|QuickTaxi\\QuickTaxi.csproj|c:\\users\\user\\source\\repos\\quicktaxi\\quicktaxi\\viewmodels\\loginviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A32A096C-942B-4BA3-84A1-9E88D9618F65}|QuickTaxi\\QuickTaxi.csproj|solutionrelative:quicktaxi\\viewmodels\\loginviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A32A096C-942B-4BA3-84A1-9E88D9618F65}|QuickTaxi\\QuickTaxi.csproj|c:\\users\\user\\source\\repos\\quicktaxi\\quicktaxi\\views\\shared\\_validationscriptspartial.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{A32A096C-942B-4BA3-84A1-9E88D9618F65}|QuickTaxi\\QuickTaxi.csproj|solutionrelative:quicktaxi\\views\\shared\\_validationscriptspartial.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A32A096C-942B-4BA3-84A1-9E88D9618F65}|QuickTaxi\\QuickTaxi.csproj|c:\\users\\user\\source\\repos\\quicktaxi\\quicktaxi\\helpers\\emailsender.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A32A096C-942B-4BA3-84A1-9E88D9618F65}|QuickTaxi\\QuickTaxi.csproj|solutionrelative:quicktaxi\\helpers\\emailsender.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A32A096C-942B-4BA3-84A1-9E88D9618F65}|QuickTaxi\\QuickTaxi.csproj|c:\\users\\user\\source\\repos\\quicktaxi\\quicktaxi\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{A32A096C-942B-4BA3-84A1-9E88D9618F65}|QuickTaxi\\QuickTaxi.csproj|solutionrelative:quicktaxi\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A32A096C-942B-4BA3-84A1-9E88D9618F65}|QuickTaxi\\QuickTaxi.csproj|c:\\users\\user\\source\\repos\\quicktaxi\\quicktaxi\\data\\applicationdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A32A096C-942B-4BA3-84A1-9E88D9618F65}|QuickTaxi\\QuickTaxi.csproj|solutionrelative:quicktaxi\\data\\applicationdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A32A096C-942B-4BA3-84A1-9E88D9618F65}|QuickTaxi\\QuickTaxi.csproj|c:\\users\\user\\source\\repos\\quicktaxi\\quicktaxi\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A32A096C-942B-4BA3-84A1-9E88D9618F65}|QuickTaxi\\QuickTaxi.csproj|solutionrelative:quicktaxi\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A32A096C-942B-4BA3-84A1-9E88D9618F65}|QuickTaxi\\QuickTaxi.csproj|c:\\users\\user\\source\\repos\\quicktaxi\\quicktaxi\\helpers\\smssender.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A32A096C-942B-4BA3-84A1-9E88D9618F65}|QuickTaxi\\QuickTaxi.csproj|solutionrelative:quicktaxi\\helpers\\smssender.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A32A096C-942B-4BA3-84A1-9E88D9618F65}|QuickTaxi\\QuickTaxi.csproj|c:\\users\\user\\source\\repos\\quicktaxi\\quicktaxi\\helpers\\twioliosettings.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A32A096C-942B-4BA3-84A1-9E88D9618F65}|QuickTaxi\\QuickTaxi.csproj|solutionrelative:quicktaxi\\helpers\\twioliosettings.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A32A096C-942B-4BA3-84A1-9E88D9618F65}|QuickTaxi\\QuickTaxi.csproj|c:\\users\\user\\source\\repos\\quicktaxi\\quicktaxi\\helpers\\emailsettings.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A32A096C-942B-4BA3-84A1-9E88D9618F65}|QuickTaxi\\QuickTaxi.csproj|solutionrelative:quicktaxi\\helpers\\emailsettings.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\MSBuild\\Current\\Bin\\amd64\\Microsoft.Common.CurrentVersion.targets||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A32A096C-942B-4BA3-84A1-9E88D9618F65}|QuickTaxi\\QuickTaxi.csproj|c:\\users\\user\\source\\repos\\quicktaxi\\quicktaxi\\models\\notification.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A32A096C-942B-4BA3-84A1-9E88D9618F65}|QuickTaxi\\QuickTaxi.csproj|solutionrelative:quicktaxi\\models\\notification.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A32A096C-942B-4BA3-84A1-9E88D9618F65}|QuickTaxi\\QuickTaxi.csproj|c:\\users\\user\\source\\repos\\quicktaxi\\quicktaxi\\models\\ride.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A32A096C-942B-4BA3-84A1-9E88D9618F65}|QuickTaxi\\QuickTaxi.csproj|solutionrelative:quicktaxi\\models\\ride.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A32A096C-942B-4BA3-84A1-9E88D9618F65}|QuickTaxi\\QuickTaxi.csproj|c:\\users\\user\\source\\repos\\quicktaxi\\quicktaxi\\models\\rate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A32A096C-942B-4BA3-84A1-9E88D9618F65}|QuickTaxi\\QuickTaxi.csproj|solutionrelative:quicktaxi\\models\\rate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A32A096C-942B-4BA3-84A1-9E88D9618F65}|QuickTaxi\\QuickTaxi.csproj|c:\\users\\user\\source\\repos\\quicktaxi\\quicktaxi\\models\\review.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A32A096C-942B-4BA3-84A1-9E88D9618F65}|QuickTaxi\\QuickTaxi.csproj|solutionrelative:quicktaxi\\models\\review.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A32A096C-942B-4BA3-84A1-9E88D9618F65}|QuickTaxi\\QuickTaxi.csproj|c:\\users\\user\\source\\repos\\quicktaxi\\quicktaxi\\models\\reward.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A32A096C-942B-4BA3-84A1-9E88D9618F65}|QuickTaxi\\QuickTaxi.csproj|solutionrelative:quicktaxi\\models\\reward.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A32A096C-942B-4BA3-84A1-9E88D9618F65}|QuickTaxi\\QuickTaxi.csproj|c:\\users\\user\\source\\repos\\quicktaxi\\quicktaxi\\models\\setting.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A32A096C-942B-4BA3-84A1-9E88D9618F65}|QuickTaxi\\QuickTaxi.csproj|solutionrelative:quicktaxi\\models\\setting.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A32A096C-942B-4BA3-84A1-9E88D9618F65}|QuickTaxi\\QuickTaxi.csproj|c:\\users\\user\\source\\repos\\quicktaxi\\quicktaxi\\models\\vehicle.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A32A096C-942B-4BA3-84A1-9E88D9618F65}|QuickTaxi\\QuickTaxi.csproj|solutionrelative:quicktaxi\\models\\vehicle.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A32A096C-942B-4BA3-84A1-9E88D9618F65}|QuickTaxi\\QuickTaxi.csproj|c:\\users\\user\\source\\repos\\quicktaxi\\quicktaxi\\models\\payment.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A32A096C-942B-4BA3-84A1-9E88D9618F65}|QuickTaxi\\QuickTaxi.csproj|solutionrelative:quicktaxi\\models\\payment.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A32A096C-942B-4BA3-84A1-9E88D9618F65}|QuickTaxi\\QuickTaxi.csproj|c:\\users\\user\\source\\repos\\quicktaxi\\quicktaxi\\models\\errorviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A32A096C-942B-4BA3-84A1-9E88D9618F65}|QuickTaxi\\QuickTaxi.csproj|solutionrelative:quicktaxi\\models\\errorviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A32A096C-942B-4BA3-84A1-9E88D9618F65}|QuickTaxi\\QuickTaxi.csproj|c:\\users\\user\\source\\repos\\quicktaxi\\quicktaxi\\models\\driver.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A32A096C-942B-4BA3-84A1-9E88D9618F65}|QuickTaxi\\QuickTaxi.csproj|solutionrelative:quicktaxi\\models\\driver.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A32A096C-942B-4BA3-84A1-9E88D9618F65}|QuickTaxi\\QuickTaxi.csproj|c:\\users\\user\\source\\repos\\quicktaxi\\quicktaxi\\models\\biometricauthentication.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A32A096C-942B-4BA3-84A1-9E88D9618F65}|QuickTaxi\\QuickTaxi.csproj|solutionrelative:quicktaxi\\models\\biometricauthentication.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A32A096C-942B-4BA3-84A1-9E88D9618F65}|QuickTaxi\\QuickTaxi.csproj|c:\\users\\user\\source\\repos\\quicktaxi\\quicktaxi\\helpers\\codegenerator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A32A096C-942B-4BA3-84A1-9E88D9618F65}|QuickTaxi\\QuickTaxi.csproj|solutionrelative:quicktaxi\\helpers\\codegenerator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A32A096C-942B-4BA3-84A1-9E88D9618F65}|QuickTaxi\\QuickTaxi.csproj|c:\\users\\user\\source\\repos\\quicktaxi\\quicktaxi\\controllers\\admincontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A32A096C-942B-4BA3-84A1-9E88D9618F65}|QuickTaxi\\QuickTaxi.csproj|solutionrelative:quicktaxi\\controllers\\admincontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A32A096C-942B-4BA3-84A1-9E88D9618F65}|QuickTaxi\\QuickTaxi.csproj|c:\\users\\user\\source\\repos\\quicktaxi\\quicktaxi\\controllers\\drivercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A32A096C-942B-4BA3-84A1-9E88D9618F65}|QuickTaxi\\QuickTaxi.csproj|solutionrelative:quicktaxi\\controllers\\drivercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A32A096C-942B-4BA3-84A1-9E88D9618F65}|QuickTaxi\\QuickTaxi.csproj|c:\\users\\user\\source\\repos\\quicktaxi\\quicktaxi\\.gitignore||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{A32A096C-942B-4BA3-84A1-9E88D9618F65}|QuickTaxi\\QuickTaxi.csproj|solutionrelative:quicktaxi\\.gitignore||{8B382828-6202-11D1-8870-0000F87579D2}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 1,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "AuthController.cs",
+              "DocumentMoniker": "C:\\Users\\User\\source\\repos\\QuickTaxi\\QuickTaxi\\Controllers\\AuthController.cs",
+              "RelativeDocumentMoniker": "QuickTaxi\\Controllers\\AuthController.cs",
+              "ToolTip": "C:\\Users\\User\\source\\repos\\QuickTaxi\\QuickTaxi\\Controllers\\AuthController.cs",
+              "RelativeToolTip": "QuickTaxi\\Controllers\\AuthController.cs",
+              "ViewState": "AQIAAN8AAAAAAAAAAAAIwPIAAAAeAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-02-16T18:45:15.706Z",
+              "IsPinned": true,
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": ".gitignore",
+              "DocumentMoniker": "C:\\Users\\User\\source\\repos\\QuickTaxi\\QuickTaxi\\.gitignore",
+              "RelativeDocumentMoniker": "QuickTaxi\\.gitignore",
+              "ToolTip": "C:\\Users\\User\\source\\repos\\QuickTaxi\\QuickTaxi\\.gitignore",
+              "RelativeToolTip": "QuickTaxi\\.gitignore",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2025-02-19T18:51:15.416Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{b1e99781-ab81-11d0-b683-00aa00a3ee26}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "C:\\Users\\User\\source\\repos\\QuickTaxi\\QuickTaxi\\Views\\Home\\Index.cshtml",
+              "RelativeDocumentMoniker": "QuickTaxi\\Views\\Home\\Index.cshtml",
+              "ToolTip": "C:\\Users\\User\\source\\repos\\QuickTaxi\\QuickTaxi\\Views\\Home\\Index.cshtml",
+              "RelativeToolTip": "QuickTaxi\\Views\\Home\\Index.cshtml",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA8AAAAKAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-02-16T23:04:54.942Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "_Layout.cshtml",
+              "DocumentMoniker": "C:\\Users\\User\\source\\repos\\QuickTaxi\\QuickTaxi\\Views\\Shared\\_Layout.cshtml",
+              "RelativeDocumentMoniker": "QuickTaxi\\Views\\Shared\\_Layout.cshtml",
+              "ToolTip": "C:\\Users\\User\\source\\repos\\QuickTaxi\\QuickTaxi\\Views\\Shared\\_Layout.cshtml",
+              "RelativeToolTip": "QuickTaxi\\Views\\Shared\\_Layout.cshtml",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAGkAAAAvAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-02-16T19:00:25.503Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "User.cs",
+              "DocumentMoniker": "C:\\Users\\User\\source\\repos\\QuickTaxi\\QuickTaxi\\Models\\User.cs",
+              "RelativeDocumentMoniker": "QuickTaxi\\Models\\User.cs",
+              "ToolTip": "C:\\Users\\User\\source\\repos\\QuickTaxi\\QuickTaxi\\Models\\User.cs",
+              "RelativeToolTip": "QuickTaxi\\Models\\User.cs",
+              "ViewState": "AQIAAA0AAAAAAAAAAAAgwAYAAAARAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-02-13T21:19:38.21Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "VerifyCodeViewModel.cs",
+              "DocumentMoniker": "C:\\Users\\User\\source\\repos\\QuickTaxi\\QuickTaxi\\ViewModels\\VerifyCodeViewModel.cs",
+              "RelativeDocumentMoniker": "QuickTaxi\\ViewModels\\VerifyCodeViewModel.cs",
+              "ToolTip": "C:\\Users\\User\\source\\repos\\QuickTaxi\\QuickTaxi\\ViewModels\\VerifyCodeViewModel.cs",
+              "RelativeToolTip": "QuickTaxi\\ViewModels\\VerifyCodeViewModel.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA4AAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-02-16T22:32:54.998Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "VerifyCode.cshtml",
+              "DocumentMoniker": "C:\\Users\\User\\source\\repos\\QuickTaxi\\QuickTaxi\\Views\\Auth\\VerifyCode.cshtml",
+              "RelativeDocumentMoniker": "QuickTaxi\\Views\\Auth\\VerifyCode.cshtml",
+              "ToolTip": "C:\\Users\\User\\source\\repos\\QuickTaxi\\QuickTaxi\\Views\\Auth\\VerifyCode.cshtml",
+              "RelativeToolTip": "QuickTaxi\\Views\\Auth\\VerifyCode.cshtml",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAIwBQAAAAGAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-02-16T22:35:08.247Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "Register.cshtml",
+              "DocumentMoniker": "C:\\Users\\User\\source\\repos\\QuickTaxi\\QuickTaxi\\Views\\Auth\\Register.cshtml",
+              "RelativeDocumentMoniker": "QuickTaxi\\Views\\Auth\\Register.cshtml",
+              "ToolTip": "C:\\Users\\User\\source\\repos\\QuickTaxi\\QuickTaxi\\Views\\Auth\\Register.cshtml",
+              "RelativeToolTip": "QuickTaxi\\Views\\Auth\\Register.cshtml",
+              "ViewState": "AQIAADEAAAAAAAAAAAAIwE8AAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-02-16T18:58:54.319Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "RegisterViewModel.cs",
+              "DocumentMoniker": "C:\\Users\\User\\source\\repos\\QuickTaxi\\QuickTaxi\\ViewModels\\RegisterViewModel.cs",
+              "RelativeDocumentMoniker": "QuickTaxi\\ViewModels\\RegisterViewModel.cs",
+              "ToolTip": "C:\\Users\\User\\source\\repos\\QuickTaxi\\QuickTaxi\\ViewModels\\RegisterViewModel.cs",
+              "RelativeToolTip": "QuickTaxi\\ViewModels\\RegisterViewModel.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAsAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-02-16T23:00:33.657Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "Login.cshtml",
+              "DocumentMoniker": "C:\\Users\\User\\source\\repos\\QuickTaxi\\QuickTaxi\\Views\\Auth\\Login.cshtml",
+              "RelativeDocumentMoniker": "QuickTaxi\\Views\\Auth\\Login.cshtml",
+              "ToolTip": "C:\\Users\\User\\source\\repos\\QuickTaxi\\QuickTaxi\\Views\\Auth\\Login.cshtml",
+              "RelativeToolTip": "QuickTaxi\\Views\\Auth\\Login.cshtml",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABYAAAAcAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-02-16T19:32:08.686Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "LoginViewModel.cs",
+              "DocumentMoniker": "C:\\Users\\User\\source\\repos\\QuickTaxi\\QuickTaxi\\ViewModels\\LoginViewModel.cs",
+              "RelativeDocumentMoniker": "QuickTaxi\\ViewModels\\LoginViewModel.cs",
+              "ToolTip": "C:\\Users\\User\\source\\repos\\QuickTaxi\\QuickTaxi\\ViewModels\\LoginViewModel.cs",
+              "RelativeToolTip": "QuickTaxi\\ViewModels\\LoginViewModel.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABMAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-02-16T19:33:12.965Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "_ValidationScriptsPartial.cshtml",
+              "DocumentMoniker": "C:\\Users\\User\\source\\repos\\QuickTaxi\\QuickTaxi\\Views\\Shared\\_ValidationScriptsPartial.cshtml",
+              "RelativeDocumentMoniker": "QuickTaxi\\Views\\Shared\\_ValidationScriptsPartial.cshtml",
+              "ToolTip": "C:\\Users\\User\\source\\repos\\QuickTaxi\\QuickTaxi\\Views\\Shared\\_ValidationScriptsPartial.cshtml",
+              "RelativeToolTip": "QuickTaxi\\Views\\Shared\\_ValidationScriptsPartial.cshtml",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-02-19T17:43:00.967Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "EmailSender.cs",
+              "DocumentMoniker": "C:\\Users\\User\\source\\repos\\QuickTaxi\\QuickTaxi\\helpers\\EmailSender.cs",
+              "RelativeDocumentMoniker": "QuickTaxi\\helpers\\EmailSender.cs",
+              "ToolTip": "C:\\Users\\User\\source\\repos\\QuickTaxi\\QuickTaxi\\helpers\\EmailSender.cs",
+              "RelativeToolTip": "QuickTaxi\\helpers\\EmailSender.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAqwA4AAAAPAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-02-16T22:36:09.786Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "C:\\Users\\User\\source\\repos\\QuickTaxi\\QuickTaxi\\appsettings.json",
+              "RelativeDocumentMoniker": "QuickTaxi\\appsettings.json",
+              "ToolTip": "C:\\Users\\User\\source\\repos\\QuickTaxi\\QuickTaxi\\appsettings.json",
+              "RelativeToolTip": "QuickTaxi\\appsettings.json",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA4AAAAUAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2025-02-13T21:03:13.447Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "ApplicationDbContext.cs",
+              "DocumentMoniker": "C:\\Users\\User\\source\\repos\\QuickTaxi\\QuickTaxi\\Data\\ApplicationDbContext.cs",
+              "RelativeDocumentMoniker": "QuickTaxi\\Data\\ApplicationDbContext.cs",
+              "ToolTip": "C:\\Users\\User\\source\\repos\\QuickTaxi\\QuickTaxi\\Data\\ApplicationDbContext.cs",
+              "RelativeToolTip": "QuickTaxi\\Data\\ApplicationDbContext.cs",
+              "ViewState": "AQIAAAMAAAAAAAAAAAAAAAgAAABnAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-02-16T22:40:20.268Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 16,
+              "Title": "SmsSender.cs",
+              "DocumentMoniker": "C:\\Users\\User\\source\\repos\\QuickTaxi\\QuickTaxi\\helpers\\SmsSender.cs",
+              "RelativeDocumentMoniker": "QuickTaxi\\helpers\\SmsSender.cs",
+              "ToolTip": "C:\\Users\\User\\source\\repos\\QuickTaxi\\QuickTaxi\\helpers\\SmsSender.cs",
+              "RelativeToolTip": "QuickTaxi\\helpers\\SmsSender.cs",
+              "ViewState": "AQIAAAYAAAAAAAAAAAAAABsAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-02-18T05:12:08.363Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\User\\source\\repos\\QuickTaxi\\QuickTaxi\\Program.cs",
+              "RelativeDocumentMoniker": "QuickTaxi\\Program.cs",
+              "ToolTip": "C:\\Users\\User\\source\\repos\\QuickTaxi\\QuickTaxi\\Program.cs",
+              "RelativeToolTip": "QuickTaxi\\Program.cs",
+              "ViewState": "AQIAADQAAAAAAAAAAAAmwEAAAAABAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-02-13T21:05:44.039Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 17,
+              "Title": "TwiolioSettings.cs",
+              "DocumentMoniker": "C:\\Users\\User\\source\\repos\\QuickTaxi\\QuickTaxi\\helpers\\TwiolioSettings.cs",
+              "RelativeDocumentMoniker": "QuickTaxi\\helpers\\TwiolioSettings.cs",
+              "ToolTip": "C:\\Users\\User\\source\\repos\\QuickTaxi\\QuickTaxi\\helpers\\TwiolioSettings.cs",
+              "RelativeToolTip": "QuickTaxi\\helpers\\TwiolioSettings.cs",
+              "ViewState": "AQIAAAQAAAAAAAAAAAAzwAYAAAAvAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-02-18T06:23:07.26Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 18,
+              "Title": "EmailSettings.cs",
+              "DocumentMoniker": "C:\\Users\\User\\source\\repos\\QuickTaxi\\QuickTaxi\\helpers\\EmailSettings.cs",
+              "RelativeDocumentMoniker": "QuickTaxi\\helpers\\EmailSettings.cs",
+              "ToolTip": "C:\\Users\\User\\source\\repos\\QuickTaxi\\QuickTaxi\\helpers\\EmailSettings.cs",
+              "RelativeToolTip": "QuickTaxi\\helpers\\EmailSettings.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAgAAAAyAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-02-18T06:22:35.4Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 19,
+              "Title": "Microsoft.Common.CurrentVersion.targets",
+              "DocumentMoniker": "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\MSBuild\\Current\\Bin\\amd64\\Microsoft.Common.CurrentVersion.targets",
+              "RelativeDocumentMoniker": "..\\..\\..\\..\\..\\Program Files\\Microsoft Visual Studio\\2022\\Community\\MSBuild\\Current\\Bin\\amd64\\Microsoft.Common.CurrentVersion.targets",
+              "ToolTip": "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\MSBuild\\Current\\Bin\\amd64\\Microsoft.Common.CurrentVersion.targets",
+              "RelativeToolTip": "..\\..\\..\\..\\..\\Program Files\\Microsoft Visual Studio\\2022\\Community\\MSBuild\\Current\\Bin\\amd64\\Microsoft.Common.CurrentVersion.targets",
+              "ViewState": "AQIAAH8UAAAAAAAAAADgv48UAAAlAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003801|",
+              "WhenOpened": "2025-02-18T03:47:09.398Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 20,
+              "Title": "Notification.cs",
+              "DocumentMoniker": "C:\\Users\\User\\source\\repos\\QuickTaxi\\QuickTaxi\\Models\\Notification.cs",
+              "RelativeDocumentMoniker": "QuickTaxi\\Models\\Notification.cs",
+              "ToolTip": "C:\\Users\\User\\source\\repos\\QuickTaxi\\QuickTaxi\\Models\\Notification.cs",
+              "RelativeToolTip": "QuickTaxi\\Models\\Notification.cs",
+              "ViewState": "AQIAABAAAAAAAAAAAAAkwBgAAAAFAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-02-16T21:37:13.998Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 26,
+              "Title": "Vehicle.cs",
+              "DocumentMoniker": "C:\\Users\\User\\source\\repos\\QuickTaxi\\QuickTaxi\\Models\\Vehicle.cs",
+              "RelativeDocumentMoniker": "QuickTaxi\\Models\\Vehicle.cs",
+              "ToolTip": "C:\\Users\\User\\source\\repos\\QuickTaxi\\QuickTaxi\\Models\\Vehicle.cs",
+              "RelativeToolTip": "QuickTaxi\\Models\\Vehicle.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABIAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-02-13T21:20:54.946Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 21,
+              "Title": "Ride.cs",
+              "DocumentMoniker": "C:\\Users\\User\\source\\repos\\QuickTaxi\\QuickTaxi\\Models\\Ride.cs",
+              "RelativeDocumentMoniker": "QuickTaxi\\Models\\Ride.cs",
+              "ToolTip": "C:\\Users\\User\\source\\repos\\QuickTaxi\\QuickTaxi\\Models\\Ride.cs",
+              "RelativeToolTip": "QuickTaxi\\Models\\Ride.cs",
+              "ViewState": "AQIAAAYAAAAAAAAAAAAAAAwAAAAVAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-02-13T21:21:06.834Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 22,
+              "Title": "Rate.cs",
+              "DocumentMoniker": "C:\\Users\\User\\source\\repos\\QuickTaxi\\QuickTaxi\\Models\\Rate.cs",
+              "RelativeDocumentMoniker": "QuickTaxi\\Models\\Rate.cs",
+              "ToolTip": "C:\\Users\\User\\source\\repos\\QuickTaxi\\QuickTaxi\\Models\\Rate.cs",
+              "RelativeToolTip": "QuickTaxi\\Models\\Rate.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-02-16T22:51:03.343Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 24,
+              "Title": "Reward.cs",
+              "DocumentMoniker": "C:\\Users\\User\\source\\repos\\QuickTaxi\\QuickTaxi\\Models\\Reward.cs",
+              "RelativeDocumentMoniker": "QuickTaxi\\Models\\Reward.cs",
+              "ToolTip": "C:\\Users\\User\\source\\repos\\QuickTaxi\\QuickTaxi\\Models\\Reward.cs",
+              "RelativeToolTip": "QuickTaxi\\Models\\Reward.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAsAAAAVAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-02-16T22:51:20.123Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 23,
+              "Title": "Review.cs",
+              "DocumentMoniker": "C:\\Users\\User\\source\\repos\\QuickTaxi\\QuickTaxi\\Models\\Review.cs",
+              "RelativeDocumentMoniker": "QuickTaxi\\Models\\Review.cs",
+              "ToolTip": "C:\\Users\\User\\source\\repos\\QuickTaxi\\QuickTaxi\\Models\\Review.cs",
+              "RelativeToolTip": "QuickTaxi\\Models\\Review.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-02-16T22:51:28.897Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 27,
+              "Title": "Payment.cs",
+              "DocumentMoniker": "C:\\Users\\User\\source\\repos\\QuickTaxi\\QuickTaxi\\Models\\Payment.cs",
+              "RelativeDocumentMoniker": "QuickTaxi\\Models\\Payment.cs",
+              "ToolTip": "C:\\Users\\User\\source\\repos\\QuickTaxi\\QuickTaxi\\Models\\Payment.cs",
+              "RelativeToolTip": "QuickTaxi\\Models\\Payment.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABMAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-02-13T21:21:28.467Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 25,
+              "Title": "Setting.cs",
+              "DocumentMoniker": "C:\\Users\\User\\source\\repos\\QuickTaxi\\QuickTaxi\\Models\\Setting.cs",
+              "RelativeDocumentMoniker": "QuickTaxi\\Models\\Setting.cs",
+              "ToolTip": "C:\\Users\\User\\source\\repos\\QuickTaxi\\QuickTaxi\\Models\\Setting.cs",
+              "RelativeToolTip": "QuickTaxi\\Models\\Setting.cs",
+              "ViewState": "AQIAAAYAAAAAAAAAAAAQwAwAAAAVAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-02-13T21:43:26.214Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 28,
+              "Title": "ErrorViewModel.cs",
+              "DocumentMoniker": "C:\\Users\\User\\source\\repos\\QuickTaxi\\QuickTaxi\\Models\\ErrorViewModel.cs",
+              "RelativeDocumentMoniker": "QuickTaxi\\Models\\ErrorViewModel.cs",
+              "ToolTip": "C:\\Users\\User\\source\\repos\\QuickTaxi\\QuickTaxi\\Models\\ErrorViewModel.cs",
+              "RelativeToolTip": "QuickTaxi\\Models\\ErrorViewModel.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-02-13T21:19:43.718Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 29,
+              "Title": "Driver.cs",
+              "DocumentMoniker": "C:\\Users\\User\\source\\repos\\QuickTaxi\\QuickTaxi\\Models\\Driver.cs",
+              "RelativeDocumentMoniker": "QuickTaxi\\Models\\Driver.cs",
+              "ToolTip": "C:\\Users\\User\\source\\repos\\QuickTaxi\\QuickTaxi\\Models\\Driver.cs",
+              "RelativeToolTip": "QuickTaxi\\Models\\Driver.cs",
+              "ViewState": "AQIAAAYAAAAAAAAAAAA6wBMAAAAFAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-02-13T21:20:39.99Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 30,
+              "Title": "BiometricAuthentication.cs",
+              "DocumentMoniker": "C:\\Users\\User\\source\\repos\\QuickTaxi\\QuickTaxi\\Models\\BiometricAuthentication.cs",
+              "RelativeDocumentMoniker": "QuickTaxi\\Models\\BiometricAuthentication.cs",
+              "ToolTip": "C:\\Users\\User\\source\\repos\\QuickTaxi\\QuickTaxi\\Models\\BiometricAuthentication.cs",
+              "RelativeToolTip": "QuickTaxi\\Models\\BiometricAuthentication.cs",
+              "ViewState": "AQIAAAIAAAAAAAAAAAAmwAsAAAAVAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-02-16T21:37:34.749Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 31,
+              "Title": "CodeGenerator.cs",
+              "DocumentMoniker": "C:\\Users\\User\\source\\repos\\QuickTaxi\\QuickTaxi\\helpers\\CodeGenerator.cs",
+              "RelativeDocumentMoniker": "QuickTaxi\\helpers\\CodeGenerator.cs",
+              "ToolTip": "C:\\Users\\User\\source\\repos\\QuickTaxi\\QuickTaxi\\helpers\\CodeGenerator.cs",
+              "RelativeToolTip": "QuickTaxi\\helpers\\CodeGenerator.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-02-16T22:39:05.147Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 32,
+              "Title": "AdminController.cs",
+              "DocumentMoniker": "C:\\Users\\User\\source\\repos\\QuickTaxi\\QuickTaxi\\Controllers\\AdminController.cs",
+              "RelativeDocumentMoniker": "QuickTaxi\\Controllers\\AdminController.cs",
+              "ToolTip": "C:\\Users\\User\\source\\repos\\QuickTaxi\\QuickTaxi\\Controllers\\AdminController.cs",
+              "RelativeToolTip": "QuickTaxi\\Controllers\\AdminController.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAoAAAAaAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-02-16T20:32:44.552Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 33,
+              "Title": "DriverController.cs",
+              "DocumentMoniker": "C:\\Users\\User\\source\\repos\\QuickTaxi\\QuickTaxi\\Controllers\\DriverController.cs",
+              "RelativeDocumentMoniker": "QuickTaxi\\Controllers\\DriverController.cs",
+              "ToolTip": "C:\\Users\\User\\source\\repos\\QuickTaxi\\QuickTaxi\\Controllers\\DriverController.cs",
+              "RelativeToolTip": "QuickTaxi\\Controllers\\DriverController.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAgAAAAoAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-02-16T20:31:46.915Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 34,
+              "Title": ".gitignore",
+              "DocumentMoniker": "C:\\Users\\User\\source\\repos\\QuickTaxi\\QuickTaxi\\.gitignore",
+              "RelativeDocumentMoniker": "QuickTaxi\\.gitignore",
+              "ToolTip": "C:\\Users\\User\\source\\repos\\QuickTaxi\\QuickTaxi\\.gitignore",
+              "RelativeToolTip": "QuickTaxi\\.gitignore",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABIAAAAQAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2025-02-13T22:26:59.443Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{d78612c7-9962-4b83-95d9-268046dad23a}"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

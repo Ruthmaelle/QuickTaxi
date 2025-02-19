@@ -4,13 +4,13 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace QuickTaxi.Models
 {
-    public class Settings
+    public class Setting
     {
         [Key]
         public int Id { get; set; }
 
         [ForeignKey("User")]
-        public int UserId { get; set; }
+        public string UserId { get; set; }
 
         public string Language { get; set; } = "fr";
 

@@ -1,15 +1,32 @@
-﻿namespace QuickTaxi.Models
+﻿using System;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+
+namespace QuickTaxi.Models
 {
     public class Vehicle
     {
-        public int Id { get; set; }
-        public int DriverId { get; set; }
-        public string Brand { get; set; }
-        public string Model { get; set; }
-        public int Year { get; set; }
-        public string PlateNumber { get; set; }
-        public string VehicleType { get; set; } // "economique", "premium", "van"
+        [Key]
+        public Guid VehicleId { get; set; }
 
+        [ForeignKey("Driver")]
+        public Guid DriverId { get; set; }
         public Driver Driver { get; set; }
+
+        [Required]
+        [MaxLength(100)]
+        public string Brand { get; set; }
+
+        [Required]
+        [MaxLength(100)]
+        public string Model { get; set; }
+
+        [Required]
+        [MaxLength(50)]
+        public string Color { get; set; }
+
+        [Required]
+        [MaxLength(20)]
+        public string LicensePlate { get; set; }
     }
 }

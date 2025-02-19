@@ -9,7 +9,11 @@ namespace QuickTaxi.Models
         public int Id { get; set; }
 
         [ForeignKey("User")]
-        public int UserId { get; set; }
+        public string UserId { get; set; }
+
+        [ForeignKey("Ride")]
+        public Guid RideId { get; set; }
+        public Ride Ride { get; set; }
 
         public int Points { get; set; } = 0;
 

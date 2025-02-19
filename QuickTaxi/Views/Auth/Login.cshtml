@@ -1,0 +1,32 @@
+﻿@model QuickTaxi.ViewModels.LoginViewModel
+
+<h2>Connexion</h2>
+
+<form asp-action="Login" method="post">
+    <div>
+        <label>Email</label>
+        <input asp-for="Email" class="form-control" type="email" required />
+    </div>
+    <div>
+        <label>Mot de passe</label>
+        <input asp-for="Password" class="form-control" type="password" required />
+    </div>
+    <div>
+        <input asp-for="RememberMe" type="checkbox" /> Se souvenir de moi
+    </div>
+
+    <!-- 📌 Choix du mode de vérification -->
+    <div class="form-group">
+        <label>Comment souhaitez-vous recevoir votre code de vérification ?</label>
+        <div class="form-check">
+            <input class="form-check-input" type="radio" name="PreferredVerificationMethod" value="email" id="emailOption" checked>
+            <label class="form-check-label" for="emailOption">Par e-mail</label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="radio" name="PreferredVerificationMethod" value="sms" id="smsOption">
+            <label class="form-check-label" for="smsOption">Par SMS</label>
+        </div>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Se connecter</button>
+</form>

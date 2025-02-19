@@ -1,17 +1,22 @@
-﻿namespace QuickTaxi.Models
+﻿using System;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+
+namespace QuickTaxi.Models
 {
     public class Review
     {
-        public int Id { get; set; }
-        public int RideId { get; set; }
-        public int PassengerId { get; set; }
-        public int DriverId { get; set; }
-        public int Rating { get; set; } // Between 1 and 5
-        public string Comment { get; set; }
-        public DateTime ReviewDate { get; set; } = DateTime.UtcNow;
+        [Key]
+        public Guid ReviewId { get; set; }
 
+        [ForeignKey("Ride")]
+        public Guid RideId { get; set; }
         public Ride Ride { get; set; }
-        public User Passenger { get; set; }
-        public Driver Driver { get; set; }
+
+        [Required]
+        [Range(1, 5)]
+        public decimal Rating { get; set; }
+
+        public string? Comment { get; set; }
     }
 }

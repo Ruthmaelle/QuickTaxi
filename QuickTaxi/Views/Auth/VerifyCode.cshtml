@@ -1,0 +1,54 @@
+﻿@model QuickTaxi.ViewModels.VerifyCodeViewModel
+
+@if (Model ==null)
+{
+    <p style="color: red;">❌ Erreur : Les données du modèle ne sont pas disponibles.</p>
+}
+else
+{
+    
+    /*@{
+        Console.WriteLine($"📌 DEBUG : Model.Email = {Model?.Email}");
+        Console.WriteLine($"📌 DEBUG : Model.PhoneNumber = {Model?.PhoneNumber}");
+        Console.WriteLine($"📌 DEBUG : Model.IsSmsVerification = {Model?.IsSmsVerification}");
+        Console.WriteLine($"📌 DEBUG : Model.Code = {Model?.Code}");
+    }
+
+
+    @{
+        ViewData["Title"] = "Vérification du Code";
+    }
+    */
+
+    <h2>Confirmez votre inscription</h2>
+
+    @if (Model.IsSmsVerification)
+    {
+        <p>Un code a été envoyé à votre téléphone : <strong>@Model.PhoneNumber</strong> (Valable pour 10min)</p>
+    }
+    else
+    {
+        <p>Un code a été envoyé à votre email : <strong>@Model.Email</strong> Valable pour 10min</p>
+    }
+
+    <form asp-controller="Auth" asp-action="VerifyCode" method="post">
+        <input type="hidden" asp-for="Email" />
+        <input type="hidden" asp-for="PhoneNumber" />
+        <input type="hidden" asp-for="IsSmsVerification" />
+
+        <div class="form-group">
+            <label>Entrez votre code de vérification</label>
+            <input asp-for="Code" class="form-control" required />
+        </div>
+
+        <div>
+            <p><strong>DEBUG:</strong></p>
+            <p>Email : @Model.Email</p>
+            <p>Téléphone : @Model.PhoneNumber</p>
+            <p>Code : @Model.Code</p>
+            <p>Vérification par SMS : @Model.IsSmsVerification</p>
+        </div>
+
+        <button type="submit" class="btn btn-primary mt-3">Vérifier</button>
+    </form>
+    }

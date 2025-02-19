@@ -1,8 +1,39 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Accueil";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+@if (TempData["WelcomeMessage"] != null)
+{
+    <div class="alert alert-success text-center">
+        <strong>@TempData["WelcomeMessage"]</strong>
+    </div>
+}
+
+@if (TempData["SuccessMessage"] != null)
+{
+    <div class="alert alert-success">
+        @TempData["SuccessMessage"]
+    </div>
+}
+
+
+<!-- HERO SECTION -->
+<div class="hero-section">
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+        <h1>Réservez un taxi maintenant</h1>
+        <input type="text" placeholder="📍 Entrez votre lieu de départ">
+        <input type="text" placeholder="📍 Entrez votre destination">
+        <div>
+            <button class="btn btn-dark">Démarrer</button>
+            <button class="btn btn-light">Planifier</button>
+        </div>
+    </div>
+</div>
+
+<!-- PROMO SECTION -->
+<div class="promo-section">
+    <h2>QuickTaxi, votre service de transport sécurisé</h2>
+    <p>Une plateforme pour gérer vos trajets en toute sécurité.</p>
+    <a class="btn btn-dark">Réservez maintenant</a>
 </div>

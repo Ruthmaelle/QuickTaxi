@@ -1,0 +1,83 @@
+﻿@model QuickTaxi.ViewModels.RegisterViewModel
+
+<form method="post" asp-action="Register">
+    <div asp-validation-summary="All" class="text-danger"></div> <!-- Displays validation errors -->
+
+    <div class="form-group">
+        <label>Prénom</label>
+        <input asp-for="FirstName" class="form-control" required />
+        <span asp-validation-for="FirstName" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label>Nom</label>
+        <input asp-for="LastName" class="form-control" required />
+        <span asp-validation-for="LastName" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label>Email</label>
+        <input asp-for="Email" type="email" class="form-control" required />
+        <span asp-validation-for="Email" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label for="CountryCode">Code Pays</label>
+        <div class="input-group">
+            <select id="CountryCode" name="CountryCode" class="form-select" required>
+                <option value="+1" selected>🇺🇸 +1 (USA)</option>
+                <option value="+33">🇫🇷 +33 (France)</option>
+                <option value="+44">🇬🇧 +44 (UK)</option>
+                <option value="+49">🇩🇪 +49 (Germany)</option>
+                <option value="+91">🇮🇳 +91 (India)</option>
+                <option value="+509">🇭🇹 +509 (Haiti)</option>
+                <option value="+229">🇧🇯 +229 (Benin)</option>
+                <option value="+221">🇸🇳 +221 (Senegal)</option>
+                <option value="+225">🇨🇮 +225 (Ivory Coast)</option>
+            </select>
+            <input asp-for="PhoneNumber" class="form-control" placeholder="Ex: 123456789" required />
+        </div>
+        <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+    </div>
+
+
+
+    <div class="form-group">
+        <label>Mot de passe</label>
+        <input asp-for="Password" type="password" class="form-control" required />
+        <span asp-validation-for="Password" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label>Confirmer le mot de passe</label>
+        <input asp-for="ConfirmPassword" type="password" class="form-control" required />
+        <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label>Type de compte</label>
+        <select asp-for="Role" class="form-control" required>
+            <option value="Passenger">Passager</option>
+            <option value="Driver">Conducteur</option>
+        </select>
+        <span asp-validation-for="Role" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label>Comment souhaitez-vous recevoir votre code de vérification ?</label>
+        <div class="form-check">
+            <input class="form-check-input" type="radio" name="PreferredVerificationMethod" value="email" id="emailOption" checked>
+            <label class="form-check-label" for="emailOption">Par e-mail</label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="radio" name="PreferredVerificationMethod" value="sms" id="smsOption">
+            <label class="form-check-label" for="smsOption">Par SMS</label>
+        </div>
+    </div>
+
+    <input type="hidden" name="PreferredVerificationMethod" value="@Model.PreferredVerificationMethod" />
+    <input type="hidden" name="PhoneNumber" value="@Model.PhoneNumber" />
+    <input type="hidden" name="Email" value="@Model.Email" />
+
+
+    <button type="submit" class="btn btn-primary mt-3">S'inscrire</button>
+</form>
