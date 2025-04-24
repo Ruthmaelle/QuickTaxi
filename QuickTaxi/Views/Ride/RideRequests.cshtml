@@ -1,0 +1,105 @@
+﻿@model IEnumerable<QuickTaxi.Models.Ride>
+
+@{
+    ViewData["Title"] = "Demandes de courses";
+}
+
+<h2 class="mb-4">📋 Demandes de courses</h2>
+
+@if (TempData["SuccessMessage"] != null)
+{
+    <div class="alert alert-success">@TempData["SuccessMessage"]</div>
+}
+@if (TempData["ErrorMessage"] != null)
+{
+    <div class="alert alert-danger">@TempData["ErrorMessage"]</div>
+}
+
+@if (Model.Any())
+{
+    <table class="table table-bordered table-hover">
+        <thead class="table-dark">
+            <tr>
+                <th>🕒 Date</th>
+                <th>🚗 Passager</th>
+                <th>📍 Départ</th>
+                <th>🎯 Destination</th>
+                <th>📊 Statut</th>
+                <th>💵 Prix</th>
+                <th>👨‍✈️ Chauffeur</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var ride in Model)
+            {
+                <tr>
+                    <td>@ride.RideDate.ToString("dd/MM/yyyy HH:mm")</td>
+                    <td>@ride.Passenger?.FirstName @ride.Passenger?.LastName</td>
+                    <td>@ride.PickupAddress</td>
+                    <td>@ride.DestinationAddress</td>
+                    <td>
+                        @if (ride.Status == "Assigned")
+                        {
+                            <span class="badge bg-primary">Assigné</span>
+                        }
+                        else if (ride.Status == "Completed")
+                        {
+                            <span class="badge bg-success">Terminé</span>
+                        }
+                        else if (ride.Status == "Cancelled")
+                        {
+                            <span class="badge bg-danger">Annulé</span>
+                        }
+                        else
+                        {
+                            <span class="badge bg-warning">En attente</span>
+                        }
+                    </td>
+                    <td>@ride.EstimatedPrice.ToString("0.00") $</td>
+                    <td>
+                        @if (ride.Driver != null)
+                        {
+                            @ride.Driver.FirstName @ride.Driver.LastName
+                        }
+                        else
+                        {
+                            <span class="text-muted">Aucun</span>
+                        }
+                    </td>
+                    <td>
+                        @if (ride.Status == "Pending")
+                        {
+
+                            <form asp-action="AssignDriver" asp-controller="Ride" method="post" class="d-inline">
+                                <input type="hidden" name="rideId" value="@ride.RideId" />
+
+                                <select name="driverId" class="form-select form-select-sm d-inline w-auto me-2">
+                                    @foreach (var driver in ViewBag.AvailableDrivers as List<QuickTaxi.Models.Driver>)
+                                    {
+                                        <option value="@driver.DriverId">@driver.FirstName @driver.LastName</option>
+                                    }
+                                </select>
+                                <br />
+                                <button type="submit" class="btn btn-sm btn-success">✅ Affecter Chauffeur</button>
+                            </form>
+
+                            <form asp-action="RejectRide" asp-controller="Ride" method="post" class="d-inline">
+                                <input type="hidden" name="rideId" value="@ride.RideId" />
+                                <button type="submit" class="btn btn-sm btn-danger">Refuser</button>
+                            </form>
+                        }
+                        else
+                        {
+                            <span class="text-muted">Aucune action</span>
+                        }
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <div class="alert alert-info">Aucune demande de course en attente.</div>
+}

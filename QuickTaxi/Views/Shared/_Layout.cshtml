@@ -1,0 +1,221 @@
+﻿@using System.Security.Claims
+
+@if (TempData["SuccessMessage"] != null)
+{
+    <div class="alert alert-success">@TempData["SuccessMessage"]</div>
+}
+@if (TempData["ErrorMessage"] != null)
+{
+    <div class="alert alert-danger">@TempData["ErrorMessage"]</div>
+}
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - QuickTaxi</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/QuickTaxi.styles.css" asp-append-version="true" />
+    <style>
+        /* NAVBAR */
+        .navbar {
+            background: #000;
+            padding: 1rem;
+        }
+
+            .navbar .nav-link, .navbar-brand {
+                color: white !important;
+                font-weight: 600;
+            }
+
+        .btn-signup {
+            background-color: #FFD700;
+            color: black;
+            font-weight: bold;
+            border-radius: 20px;
+        }
+
+        .btn-login {
+            color: white;
+            border: 1px solid white;
+            border-radius: 20px;
+        }
+
+        /* HERO SECTION */
+		.hero-section {
+            background: url('~/images/Woman-Mobile.jpg') center/cover no-repeat;
+            height: 85vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            position: relative;
+        }
+
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 500px;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 10px;
+        }
+
+            .hero-content input {
+                width: 100%;
+                margin-bottom: 10px;
+                padding: 10px;
+                border: none;
+                border-radius: 5px;
+            }
+
+        /* SECOND SECTION */
+        .promo-section {
+            padding: 50px;
+            text-align: center;
+        }
+
+
+        #chat-container {
+            position: fixed;
+            bottom: 90px;
+            right: 30px;
+            display: none;
+            z-index: 9999;
+        }
+
+        #chat-toggle {
+            position: fixed;
+            bottom: 20px;
+            right: 30px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            font-size: 26px;
+            cursor: pointer;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            z-index: 10000;
+        }
+    </style>
+
+   
+
+    <script src="https://www.gstatic.com/dialogflow-console/fast/messenger/bootstrap.js?v=1"></script>
+    <df-messenger intent="WELCOME"
+                  chat-title="QuickTaxiBot"
+                  agent-id="26c9ae07-276c-4ca3-9fc1-89d2fb3d8c30"
+                  language-code="fr"></df-messenger>
+
+</head>
+<body>
+
+    <!-- NAVBAR -->
+    <nav class="navbar navbar-expand-lg">
+        <div class="container">
+            <a class="navbar-brand" asp-controller="Home" asp-action="Index">🚖 QuickTaxi</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item"><a class="nav-link" asp-controller="Ride" asp-action="MyRides">Mes Courses</a></li>
+                    <li class="nav-item"><a class="nav-link" asp-controller="Home" asp-action="Privacy">Confidentialité</a></li>
+                </ul>
+                <ul class="navbar-nav">
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        //<span class="text-white">🛠 Rôle : @(User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Role)?.Value ?? "Aucun")</span>
+                        @if (User.IsInRole("Admin"))
+                        {
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="adminDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    🔧 Administration
+                                </a>
+                                <ul class="dropdown-menu" aria-labelledby="adminDropdown">
+                                    <li><a class="dropdown-item" asp-controller="Admin" asp-action="AllReports">📢 Signalements</a></li>
+
+                                    <li><a class="dropdown-item" asp-controller="Admin" asp-action="Dashboard">Tableau de Bord </a></li>
+                                    <li><a class="dropdown-item" asp-controller="Admin" asp-action="AllRides">All Ride</a></li>
+                                    <li><a class="dropdown-item" asp-controller="Admin" asp-action="ManageUsers">Gérer les utilisateurs</a></li>
+                                    <li><a class="dropdown-item" asp-controller="Profile" asp-action="DriverRequests">Approuver Chauffeurs</a></li>
+                                    <li><a class="dropdown-item" asp-controller="Ride" asp-action="RideRequests">Affectation de courses</a></li>
+                                </ul>
+                            </li>
+                        }
+                        @if (User.IsInRole("Driver"))
+                        {
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                                    🚖 Chauffeur
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li><a class="dropdown-item" asp-controller="Driver" asp-action="Dashboard">Tableau de bord</a></li>
+                                    <li><a class="dropdown-item" asp-controller="Ride" asp-action="AvailableRides">Courses disponibles</a></li>
+                                    <li><a class="dropdown-item" asp-controller="Ride" asp-action="DriverRides">Mes courses</a></li>
+                                </ul>
+                            </li>
+                        }
+                        @if (User.IsInRole("Passenger"))
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link" asp-controller="Ride" asp-action="RequestRide">Réserver un Taxi</a>
+                            </li>
+                        }
+                        <a asp-controller="Profile" asp-action="Profile" class="nav-link">Mon Profil</a>
+                        <li class="nav-item">
+                            <form asp-controller="Auth" asp-action="Logout" method="post" class="d-inline">
+                                <button type="submit" class="btn btn-danger">Déconnexion</button>
+                            </form>
+                        </li>
+                    }
+                    else
+                    {
+                        <li class="nav-item">
+                            <a class="btn btn-outline-light btn-login me-2" asp-controller="Auth" asp-action="Login">Se connecter</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="btn btn-signup" asp-controller="Auth" asp-action="Register">S'inscrire</a>
+                        </li>
+                    } 
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- CONTENU DES PAGES ENFANT -->
+    <div class="container mt-4">
+        <main role="main" class="pb-3">
+            @RenderBody()  <!-- ✅ Correction ici -->
+        </main>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="footer mt-auto py-3 bg-dark text-white text-center">
+        <div class="container">
+            &copy; 2025 QuickTaxi - <a asp-controller="Home" asp-action="Privacy" class="text-light text-decoration-none">Confidentialité</a>
+        </div>
+    </footer>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+
+
+</body>
+</html>

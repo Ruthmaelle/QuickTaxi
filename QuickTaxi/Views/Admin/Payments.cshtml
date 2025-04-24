@@ -1,0 +1,40 @@
+﻿@model List<Ride>
+@{
+    ViewData["Title"] = "Reçus de Paiement";
+}
+
+<h2 class="mb-4">Reçus de Paiement</h2>
+
+<table class="table table-striped">
+    <thead class="table-dark">
+        <tr>
+            <th>Date</th>
+            <th>Passager</th>
+            <th>Chauffeur</th>
+            <th>Départ</th>
+            <th>Destination</th>
+            <th>Montant</th>
+            <th>Methode</th>
+            <th>Reçu</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var ride in Model)
+        {
+            <tr>
+                <td>@ride.RideDate.ToLocalTime().ToString("dd/MM/yyyy HH:mm")</td>
+                <td>@ride.Passenger?.FirstName @ride.Passenger?.LastName</td>
+                <td>@ride.Driver?.FirstName @ride.Driver?.LastName</td>
+                <td>@ride.PickupAddress</td>
+                <td>@ride.DestinationAddress</td>
+                <td>$@ride.EstimatedPrice</td>
+                <td>@ride.PaymentMethod</td>
+                <td>
+                    <a asp-controller="Payment" asp-action="Receipt" asp-route-rideId="@ride.RideId" class="btn btn-sm btn-outline-info">
+                        📄 Télécharger
+                    </a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

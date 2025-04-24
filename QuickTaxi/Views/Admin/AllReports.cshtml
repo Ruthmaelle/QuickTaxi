@@ -1,0 +1,56 @@
+﻿@model List<QuickTaxi.Models.Report>
+
+@{
+    ViewData["Title"] = "Signalements des utilisateurs";
+}
+
+<h2 class="mb-4">📢 Signalements reçus</h2>
+
+@if (Model.Count == 0)
+{
+    <div class="alert alert-info">Aucun signalement pour le moment.</div>
+}
+else
+{
+    <table class="table table-bordered table-striped">
+        <thead class="table-dark">
+            <tr>
+                <th>Utilisateur</th>
+                <th>Sujet</th>
+                <th>Message</th>
+                <th>Reçu le</th>
+                <th>Status</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var report in Model)
+            {
+                <tr>
+                    <td>@(report.User?.UserName ?? "Utilisateur inconnu")</td>
+                    <td>@report.Subject</td>
+                    <td>@report.Message</td>
+                    <td>@report.CreatedAt.ToString("dd MMM yyyy HH:mm")</td>
+                    <td>
+                        @if (report.IsResolved)
+                        {
+                            <span class="badge bg-success">Résolu</span>
+                        }
+                        else
+                        {
+                            <span class="badge bg-warning text-dark">En attente</span>
+                        }
+                    </td>
+                    <td>
+                        @if (!report.IsResolved)
+                        {
+                            <form asp-action="MarkAsResolved" asp-route-id="@report.ReportId" method="post" class="d-inline">
+                                <button type="submit" class="btn btn-sm btn-outline-success">✅ Marquer comme résolu</button>
+                            </form>
+                        }
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}

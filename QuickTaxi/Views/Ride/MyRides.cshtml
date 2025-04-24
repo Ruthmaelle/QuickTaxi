@@ -1,0 +1,201 @@
+﻿@model List<QuickTaxi.Models.Ride>
+
+@{
+    ViewData["Title"] = " 🛺 Mes Courses";
+    var reviewedIds = ViewBag.ReviewedRideIds as List<Guid> ?? new List<Guid>();
+}
+
+@if (TempData["SuccessMessage"] != null)
+{
+    <div class="alert alert-success">@TempData["SuccessMessage"]</div>
+}
+@if (TempData["ErrorMessage"] != null)
+{
+    <div class="alert alert-danger">@TempData["ErrorMessage"]</div>
+}
+
+<div class="d-flex justify-content-between align-items-center mb-3">
+    <h2 class="mb-0">Mes Courses</h2>
+    <div class="form-group">
+        <label for="rideFilter">Filtrer :</label>
+        <select id="rideFilter" class="form-control" onchange="filterRides()">
+            <option value="all">Toutes</option>
+            <option value="planned">Planifiées</option>
+            <option value="immediate">Immediates</option>
+        </select>
+    </div>
+</div>
+
+<table class="table table-bordered" id="ridesTable">
+    <thead class="table-dark">
+        <tr>
+            <th>Date</th>
+            <th>Trajet</th>
+            <th>Statut</th>
+            <th>Prix</th>
+            <th>Chauffeur</th>
+            <th>Actions</th>
+            <th>Notice</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var ride in Model)
+        {
+            var isPlanned = ride.ScheduledDate != null;
+            var typeClass = isPlanned ? "planned" : "immediate";
+            <tr data-type="@typeClass">
+                <td>
+                    @if (isPlanned)
+                    {
+                        <span class="badge bg-primary">Planifiée le @ride.ScheduledDate?.ToString("dd MMM yyyy HH:mm")</span>
+                    }
+                    else
+                    {
+                        @ride.RideDate.ToLocalTime().ToString("dd MMM yyyy HH:mm")
+                    }
+                </td>
+                <td>@ride.PickupAddress → @ride.DestinationAddress</td>
+                <td>
+                    @switch (ride.Status.ToLower())
+                    {
+                        case "pending":
+                            <span class="badge bg-warning text-dark">En attente</span>
+                            break;
+                        case "assigned":
+                            <span class="badge bg-info text-dark">Assignée</span>
+                            break;
+                        case "completed":
+                            <span class="badge bg-success">Terminée</span>
+                            break;
+                        case "cancelled":
+                            <span class="badge bg-danger">Annulée</span>
+                            break;
+                        default:
+                            <span class="badge bg-secondary">@ride.Status</span>
+                            break;
+                    }
+                </td>
+                <td>@ride.EstimatedPrice.ToString("C")</td>
+                <td>
+                    @if (ride.Driver != null && ride.Driver?.User != null)
+                    {
+                        @ride.Driver.User.FirstName @ride.Driver.User.LastName
+                    }
+                    else
+                    {
+                        <span class="text-muted">Non assigné</span>
+                    }
+                </td>
+                <td>
+                    @if (ride.Status == "Pending" && ride.ScheduledDate != null)
+                    {
+                        <a asp-action="EditScheduledRide" asp-route-rideId="@ride.RideId" class="btn btn-sm btn-outline-secondary mb-1">Modifier la date</a>
+                    }
+                    @if (ride.Status == "Pending")
+                    {
+                        <a asp-action="CancelRide" asp-route-id="@ride.RideId" class="btn btn-sm btn-outline-danger">Annuler</a>
+                    }
+                    @if (ride.Status == "Completed" && !reviewedIds.Contains(ride.RideId))
+                    {
+                        <a asp-action="LeaveReview" asp-route-rideId="@ride.RideId" class="btn btn-sm btn-outline-primary">
+                            Laisser un avis
+                        </a>
+                    }
+
+                    @if (ride.PaymentStatus == "Pending" && ride.PaymentMethod.ToLower() != "cash")
+                    {
+                        <a asp-controller="Payment" asp-action="Pay" asp-route-rideId="@ride.RideId" class="btn btn-sm btn-outline-primary">
+                            Payer maintenant
+                        </a>
+                    }
+                    @if (ride.Status == "Completed" && reviewedIds.Contains(ride.RideId) && ride.PaymentStatus == "Paid")
+                    {
+                        <span class="text-muted">~NO ACTIONS~</span>
+                    }
+                </td>
+                <td>
+                    @if (ride.PaymentStatus == "Paid")
+                    {
+                        <span class="badge bg-success">✅ Payée</span>
+                        <button class="btn btn-sm btn-outline-dark" data-bs-toggle="modal" data-bs-target="#receiptModal-@ride.RideId">
+                            📄 Reçu 
+                        </button>
+                    }
+                    @if (ride.Status == "Completed" && reviewedIds.Contains(ride.RideId))
+                    {
+                        <span class="text-muted">✅ Avis déjà laissé</span>
+                    }
+                </td>
+            </tr>
+        }
+
+        @foreach (var ride in Model)
+        {
+            if (ride.PaymentStatus == "Paid")
+            {
+                <div class="modal fade" id="receiptModal-@ride.RideId" tabindex="-1" aria-labelledby="receiptModalLabel-@ride.RideId" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="receiptModalLabel-@ride.RideId">Résumé du reçu</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fermer"></button>
+                            </div>
+                            <div class="modal-body">
+                                <p><strong>Date :</strong> @ride.RideDate.ToLocalTime().ToString("dd MMM yyyy à HH:mm")</p>
+                                <p><strong>Départ :</strong> @ride.PickupAddress</p>
+                                <p><strong>Destination :</strong> @ride.DestinationAddress</p>
+                                <p><strong>Montant payé :</strong> @ride.EstimatedPrice $</p>
+                                <p><strong>Méthode :</strong> @ride.PaymentMethod</p>
+                            </div>
+                            <div class="modal-footer">
+                                <a href="@Url.Action("Receipt", "Payment", new { rideId = ride.RideId })" class="btn btn-primary">
+                                    📄 Télécharger le reçu PDF
+                                </a>
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        }
+
+    </tbody>
+
+</table>
+
+<form method="get" asp-action="MyRides" class="mb-3">
+    <div class="row">
+        <div class="col-md-4">
+            <select name="status" class="form-select" onchange="this.form.submit()">
+                <option value="">Toutes les courses</option>
+                <option value="Pending" selected="@(Context.Request.Query["status"] == "Pending" ? "selected" : null)">En attente</option>
+                <option value="Completed" selected="@(Context.Request.Query["status"] == "Completed" ? "selected" : null)">Complétées</option>
+                <option value="Cancelled" selected="@(Context.Request.Query["status"] == "Cancelled" ? "selected" : null)">Annulées</option>
+
+            </select>
+        </div>
+    </div>
+</form>
+
+
+<br />
+
+<a class="btn btn-sm btn-outline-secondary" asp-controller="Report" asp-action="Create">📣 Contacter l'Admin</a>
+
+@section Scripts {
+    <script>
+        function filterRides() {
+            var selected = document.getElementById("rideFilter").value;
+            var rows = document.querySelectorAll("#ridesTable tbody tr");
+
+            rows.forEach(row => {
+                var type = row.getAttribute("data-type");
+                if (selected === "all" || type === selected) {
+                    row.style.display = "table-row";
+                } else {
+                    row.style.display = "none";
+                }
+            });
+        }
+    </script>
+}

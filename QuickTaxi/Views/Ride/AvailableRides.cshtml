@@ -1,0 +1,94 @@
+﻿@model List<QuickTaxi.Models.Ride>
+
+@{
+    ViewData["Title"] = "Courses disponibles";
+}
+
+<h2 class="mb-4">Courses disponibles</h2>
+
+<div class="form-group mb-3">
+    <label for="rideFilter">Filtrer :</label>
+    <select id="rideFilter" class="form-control w-auto d-inline-block" onchange="filterRides()">
+        <option value="all">Toutes</option>
+        <option value="planned">Planifiées</option>
+        <option value="immediate">Immediates</option>
+    </select>
+</div>
+
+<table class="table table-striped" id="ridesTable">
+    <thead class="table-dark">
+        <tr>
+            <th>Date</th>
+            <th>Adresse de départ</th>
+            <th>Adresse d'arrivée</th>
+            <th>Distance</th>
+            <th>Prix estimé</th>
+            <th>Methode de Paiement</th>
+            <th>Type</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var ride in Model)
+        {
+            var isPlanned = ride.ScheduledDate != null;
+            var typeClass = isPlanned ? "planned" : "immediate";
+            <tr data-type="@typeClass">
+                <td>
+                    @if (isPlanned)
+                    {
+                        <span class="badge bg-primary">Planifiée : @ride.ScheduledDate?.ToLocalTime().ToString("dd MMM yyyy HH:mm")</span>
+                    }
+                    else
+                    {
+                        @ride.RideDate.ToLocalTime().ToString("dd MMM yyyy HH:mm")
+                    }
+                </td>
+                <td>@ride.PickupAddress</td>
+                <td>@ride.DestinationAddress</td>
+                <td>@ride.DistanceKm km</td>
+                <td>@ride.EstimatedPrice.ToString("C")</td>
+                <td>@ride.PaymentMethod</td>
+                <td>
+                    @if (isPlanned)
+                    {
+                        <span class="text-info">Planifiée</span>
+                    }
+                    else
+                    {
+                        <span class="text-success">Immediates</span>
+                    }
+                </td>
+                <td>
+                    <form asp-controller="Ride" asp-action="AcceptRide" method="post">
+                        <input type="hidden" name="rideId" value="@ride.RideId" />
+                        <button type="submit" class="btn btn-success btn-sm">Accepter</button>
+                    </form>
+
+                    <form asp-action="RejectRides" asp-controller="Ride" method="post" class="d-inline ms-2">
+                        <input type="hidden" name="rideId" value="@ride.RideId" />
+                        <button type="submit" class="btn btn-sm btn-danger">Refuser</button>
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@section Scripts {
+    <script>
+        function filterRides() {
+            var selected = document.getElementById("rideFilter").value;
+            var rows = document.querySelectorAll("#ridesTable tbody tr");
+
+            rows.forEach(row => {
+                var type = row.getAttribute("data-type");
+                if (selected === "all" || type === selected) {
+                    row.style.display = "table-row";
+                } else {
+                    row.style.display = "none";
+                }
+            });
+        }
+    </script>
+}

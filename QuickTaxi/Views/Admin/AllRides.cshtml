@@ -1,0 +1,78 @@
+﻿@model List<Ride>
+@{
+    ViewData["Title"] = "Toutes les courses";
+}
+
+<h2 class="mb-4">Toutes les courses</h2>
+
+<form method="get" asp-action="AllRides" class="mb-3">
+    <div class="row">
+        <div class="col-md-4">
+            <select name="status" class="form-select" onchange="this.form.submit()">
+                <option value="">Toutes les courses</option>
+                <option value="Pending" selected="@(Context.Request.Query["status"] == "Pending" ? "selected" : null)">En attente</option>
+                <option value="Completed" selected="@(Context.Request.Query["status"] == "Completed" ? "selected" : null)">Complétées</option>
+                <option value="Cancelled" selected="@(Context.Request.Query["status"] == "Cancelled" ? "selected" : null)">Annulées</option>
+
+            </select>
+        </div>
+    </div>
+</form>
+
+<table class="table table-striped">
+    <thead class="table-dark">
+        <tr>
+            <th>Date</th>
+            <th>Passager</th>
+            <th>Départ</th>
+            <th>Destination</th>
+            <th>Chauffeur</th>
+            <th>Statut</th>
+            <th>Paiement</th>
+            <th>Reçu</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var ride in Model)
+        {
+            <tr>
+                <td>@ride.RideDate.ToLocalTime().ToString("dd/MM/yyyy HH:mm")</td>
+                <td>@(ride.Passenger != null ? ride.Passenger.FirstName + " " + ride.Passenger.LastName : "Inconnu")</td>
+                <td>@ride.PickupAddress</td>
+                <td>@ride.DestinationAddress</td>
+                <td>
+                    @(ride.Driver != null && ride.Driver.User != null
+                        ? ride.Driver.User.FirstName + " " + ride.Driver.User.LastName
+                        : "Non assigné")
+                </td>
+                <td>@ride.Status</td>
+                <td>
+                    @if (ride.PaymentStatus == "Paid")
+                    {
+                        <span class="text-success">✅ Payé</span>
+                    }
+                    @if(ride.Status == "Cancelled")
+                    {
+                        <span class="text-muted">-</span>
+                    }
+                    @if ((ride.PaymentStatus != "Paid"))
+                    {
+                        <span class="text-danger">⏳ Non payé</span>
+                    }
+                </td>
+                <td>
+                    @if (ride.PaymentStatus == "Paid")
+                    {
+                        <a asp-controller="Admin" asp-action="Receipt" asp-route-rideId="@ride.RideId" class="btn btn-sm btn-outline-primary">
+                            📄 Voir le reçu
+                        </a>
+                    }
+                    else
+                    {
+                        <span class="text-muted">-</span>
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

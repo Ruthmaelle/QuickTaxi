@@ -1,0 +1,124 @@
+﻿@model QuickTaxi.Models.Ride
+
+@{
+    ViewData["Title"] = "Suivi de la course";
+    var startTime = TempData["StartTime"]?.ToString() ?? DateTime.Now.ToString("HH:mm:ss");
+}
+
+<h2>🛰️ Suivi en temps réel de votre course</h2>
+
+<div class="mb-3">
+    <strong>Départ :</strong> @Model.PickupAddress <br />
+    <strong>Destination :</strong> @Model.DestinationAddress <br />
+    <strong>Heure de départ :</strong> @startTime
+</div>
+
+<!-- Carte -->
+<div id="map" style="width: 100%; height: 500px; border-radius: 10px;"></div>
+
+<!-- Bouton pour Terminer -->
+<div class="mt-4 text-end">
+    <form asp-action="CompleteRide" asp-controller="Ride" method="post">
+        <input type="hidden" name="rideId" value="@Model.RideId" />
+        <button type="submit" class="btn btn-success">✅ Terminer la course</button>
+    </form>
+</div>
+
+@section Scripts {
+    <script src="https://api.mapbox.com/mapbox-gl-js/v2.13.0/mapbox-gl.js"></script>
+
+    <script>
+        mapboxgl.accessToken = 'pk.eyJ1IjoicnV0aG1hZWxsZSIsImEiOiJjbThrb2x5a3Awdmk0MmtweGhkenY4aGJvIn0.pq1bbh_n7gp93w2fX0OtvQ';
+
+        const pickup = [@Model.PickupLongitude, @Model.PickupLatitude];
+        const destination = [@Model.DestinationLongitude, @Model.DestinationLatitude];
+
+        const map = new mapboxgl.Map({
+            container: 'map',
+            style: 'mapbox://styles/mapbox/streets-v12',
+            center: pickup,
+            zoom: 13
+        });
+
+        async function getRoute() {
+            const res = await fetch(`https://api.mapbox.com/directions/v5/mapbox/driving/${pickup[0]},${pickup[1]};${destination[0]},${destination[1]}?geometries=geojson&access_token=${mapboxgl.accessToken}`);
+            const data = await res.json();
+            return data.routes[0].geometry.coordinates;
+        }
+
+        async function startSimulation() {
+            const coords = await getRoute();
+
+            map.addSource('route', {
+                type: 'geojson',
+                data: {
+                    type: 'Feature',
+                    geometry: {
+                        type: 'LineString',
+                        coordinates: coords
+                    }
+                }
+            });
+
+            map.addLayer({
+                id: 'route',
+                type: 'line',
+                source: 'route',
+                layout: {
+                    'line-join': 'round',
+                    'line-cap': 'round'
+                },
+                paint: {
+                    'line-color': '#007bff',
+                    'line-width': 5
+                }
+            });
+
+            map.fitBounds([pickup, destination], { padding: 80 });
+
+            // Ajouter l’icône personnalisée
+            map.loadImage('/images/car-icon.jpg', (error, image) => {
+                if (error) throw error;
+                if (!map.hasImage('car-icon')) {
+                    map.addImage('car-icon', image);
+                }
+
+                const el = document.createElement('div');
+                el.style.width = '32px';
+                el.style.height = '32px';
+                el.style.backgroundImage = 'url(/images/car-icon.jpg)';
+                el.style.backgroundSize = 'cover';
+
+                const driverMarker = new mapboxgl.Marker(el)
+                    .setLngLat(coords[0])
+                    .addTo(map);
+
+                let currentIndex = 0;
+
+                function animate() {
+                    currentIndex += 1;
+
+                    if (currentIndex >= coords.length) return;
+
+                    driverMarker.setLngLat(coords[currentIndex]);
+
+                    // Mettre à jour la ligne restante
+                    const remaining = coords.slice(currentIndex);
+                    map.getSource('route').setData({
+                        type: 'Feature',
+                        geometry: {
+                            type: 'LineString',
+                            coordinates: remaining
+                        }
+                    });
+
+                    setTimeout(() => requestAnimationFrame(animate), 2900); // délai pour ralentir
+                }
+
+                animate();
+            });
+        }
+
+        map.on('load', startSimulation);
+    </script>
+}

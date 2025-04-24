@@ -1,0 +1,28 @@
+﻿@{
+    ViewData["Title"] = "Signaler un problème";
+}
+
+<h2 class="mt-4">📣 Signaler un problème ou contacter l'administration</h2>
+
+@if (TempData["SuccessMessage"] != null)
+{
+    <div class="alert alert-success">@TempData["SuccessMessage"]</div>
+}
+@if (TempData["ErrorMessage"] != null)
+{
+    <div class="alert alert-danger">@TempData["ErrorMessage"]</div>
+}
+
+<form asp-action="Create" asp-controller="Report" method="post" class="mt-4">
+    <div class="mb-3">
+        <label for="subject" class="form-label">Sujet du signalement</label>
+        <input type="text" class="form-control" id="subject" name="subject" placeholder="Ex : Problème de réservation, paiement, etc." required />
+    </div>
+
+    <div class="mb-3">
+        <label for="message" class="form-label">Message détaillé</label>
+        <textarea class="form-control" id="message" name="message" rows="5" placeholder="Décrivez votre problème ici..." required></textarea>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Envoyer</button>
+</form>

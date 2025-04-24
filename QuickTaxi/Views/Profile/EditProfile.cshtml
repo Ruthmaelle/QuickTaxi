@@ -1,0 +1,46 @@
+﻿@model QuickTaxi.ViewModels.EditProfileViewModel
+
+<h2>Modifier mon profil</h2>
+
+@if (TempData["SuccessMessage"] != null)
+{
+    <div class="alert alert-success">@TempData["SuccessMessage"]</div>
+}
+@if (TempData["ErrorMessage"] != null)
+{
+    <div class="alert alert-danger">@TempData["ErrorMessage"]</div>
+}
+
+@{
+    bool isReadOnly = User.IsInRole("Admin");
+}
+
+<form method="post">
+    <div asp-validation-summary="All" class="text-danger"></div>
+
+    <div class="form-group">
+        <label>Prénom</label>
+        <input asp-for="FirstName" class="form-control" required readonly="@(User.IsInRole("Admin") ? "readonly" : null)" />
+        <span asp-validation-for="FirstName" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label>Nom</label>
+        <input asp-for="LastName" class="form-control" required readonly="@(User.IsInRole("Admin") ? "readonly" : null)" />
+        <span asp-validation-for="LastName" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label>Email (non modifiable)</label>
+        <input asp-for="Email" class="form-control" readonly />
+    </div>
+
+    <div class="form-group">
+        <label>Numéro de téléphone</label>
+        <input asp-for="PhoneNumber" class="form-control" readonly="@(User.IsInRole("Admin") ? "readonly" : null)" />
+        <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-primary mt-3">Enregistrer</button>
+    <a asp-action="Profile" class="btn btn-secondary mt-3">Annuler</a>
+</form>

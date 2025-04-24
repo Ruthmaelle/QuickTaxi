@@ -1,0 +1,73 @@
+﻿@model QuickTaxi.Models.Ride
+
+@{
+    ViewData["Title"] = "Paiement de la course";
+    var total = ViewBag.Total;
+    var tax = ViewBag.Tax;
+    var publishableKey = ViewBag.PublishableKey;
+}
+
+<h2 class="mb-4">Paiement de la course</h2>
+
+<script src="https://www.paypal.com/sdk/js?client-id=AVrYBMonY6kAyH7PEQp8n0ZAloloAvgO-hEgwUL_30PXk-EbWOSKXZ0iCUZ305saI8qA9dlyvC1R1g6B&currency=CAD"></script>
+
+
+<div class="card">
+    <div class="card-body">
+        <h5 class="card-title">Course de @Model.PickupAddress → @Model.DestinationAddress</h5>
+        <p>Date : @Model.RideDate.ToLocalTime().ToString("dd MMM yyyy à HH:mm")</p>
+        <p>Prix estimé : @Model.EstimatedPrice.ToString("C")</p>
+
+        @if (Model.PaymentMethod.ToLower() != "cash")
+        {
+            <p>Taxe (15%) : @tax.ToString("C")</p>
+            <h4>Total : <strong>@total.ToString("C")</strong></h4>
+
+            <div class="mt-4">
+                @if (Model.PaymentMethod.ToLower() == "card")
+                {
+                    <form method="post" asp-controller="Payment" asp-action="CreateCheckoutSession">
+                        <input type="hidden" name="rideId" value="@Model.RideId" />
+                        <button type="submit" class="btn btn-primary">
+                            Payer avec Carte (Stripe)
+                        </button>
+                    </form>
+                }
+                else if (Model.PaymentMethod.ToLower() == "paypal")
+                {
+                    <div id="paypal-button-container">
+                    </div>
+                }
+            </div>
+        }
+        else
+        {
+            <div class="alert alert-info mt-3">
+                <strong>Mode de paiement : Espèces</strong><br />
+                Le paiement sera effectué directement au chauffeur.
+            </div>
+        }
+    </div>
+</div>
+
+<a asp-controller="Ride" asp-action="MyRides" class="btn btn-secondary mt-3">Retour</a>
+
+<script>
+    paypal.Buttons({
+        createOrder: function (data, actions) {
+            return actions.order.create({
+                purchase_units: [{
+                    description: "Course QuickTaxi",
+                    amount: {
+                        value: '@total.ToString("0.00")'
+                    }
+                }]
+            });
+        },
+        onApprove: function (data, actions) {
+            return actions.order.capture().then(function (details) {
+                window.location.href = '/Payment/Success?rideId=@Model.RideId';
+            });
+        }
+    }).render('#paypal-button-container');
+</script>

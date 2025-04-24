@@ -1,0 +1,142 @@
+﻿@model List<QuickTaxi.Models.Driver>
+
+<h2>🚖 Demandes de Chauffeurs en Attente</h2>
+
+@if (Model != null && Model.Any())
+{
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Nom</th>
+                <th>Email</th>
+                <th>Véhicule</th>
+                <th>Statut</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var driver in Model)
+            {
+                <tr>
+                    <td>
+                        @(driver.User != null ? $"{driver.User.FirstName} {driver.User.LastName}" : "❌ Inconnu")
+                    </td>
+                    <td>
+                        @(driver.User != null ? driver.User.Email : "❌ Email inconnu")
+                    </td>
+
+                    <!-- 🚗 Véhicule Column -->
+                    <td>
+                        @if (driver.Vehicle != null)
+                        {
+                            <button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#vehicleModal-@driver.DriverId">
+                                🚗 Voir Plus
+                            </button>
+                        }
+                        else
+                        {
+                            <span class="text-danger">🚫 Aucun véhicule trouvé</span>
+                        }
+                    </td>
+
+                    <!-- 👤 Statut Column -->
+                    <td>
+                        <button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#driverModal-@driver.DriverId">
+                            🔍 Voir Détails
+                        </button>
+                    </td>
+
+                    <!-- ✅ Approval & Rejection -->
+                    <td>
+                        @if (!driver.IsApproved.GetValueOrDefault())
+                        {
+                            <form asp-action="ApproveDriver" asp-controller="Profile" method="post" class="d-inline">
+                                <input type="hidden" name="driverId" value="@driver.DriverId" />
+                                <button type="submit" class="btn btn-success">✅ Approuver</button>
+                            </form>
+
+                            <form asp-action="RejectDriver" asp-controller="Profile" method="post" class="d-inline">
+                                <input type="hidden" name="driverId" value="@driver.DriverId" />
+                                <button type="submit" class="btn btn-danger">❌ Refuser</button>
+                            </form>
+                        }
+                        else
+                        {
+                            <span class="badge bg-success">✅ Approuvé</span>
+                        }
+                    </td>
+                </tr>
+
+                <!-- 🚗 Vehicle Details Modal -->
+                <div class="modal fade" id="vehicleModal-@driver.DriverId" tabindex="-1" aria-labelledby="vehicleModalLabel-@driver.DriverId" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title">🚗 Informations du Véhicule</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                @if (driver.Vehicle != null)
+                                {
+                                    <p><strong>Marque :</strong> @driver.Vehicle.Brand</p>
+                                    <p><strong>Modèle :</strong> @driver.Vehicle.Model</p>
+                                    <p><strong>Couleur :</strong> @driver.Vehicle.Color</p>
+                                    <p><strong>Année :</strong> @driver.Vehicle.Year</p>
+                                    <p><strong>Plaque :</strong> @driver.Vehicle.LicensePlate</p>
+                                    <p><strong>Numéro d’immatriculation :</strong> @driver.Vehicle.VehicleRegistrationNumber</p>
+                                    <p><strong>Assurance :</strong> <a href="@driver.Vehicle.InsuranceDocumentUrl" target="_blank">📄 Voir Document</a></p>
+                                    <p><strong>Permis :</strong> <a href="@driver.Vehicle.LicenseDocumentUrl" target="_blank">📄 Voir Document</a></p>
+                                }
+                                else
+                                {
+                                    <p class="text-danger">🚫 Aucun véhicule trouvé</p>
+                                }
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 👤 Driver Details Modal -->
+                <div class="modal fade" id="driverModal-@driver.DriverId" tabindex="-1" aria-labelledby="driverModalLabel-@driver.DriverId" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title">👤 Informations du Chauffeur</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body text-center">
+                                <!-- 🚀 PROFILE PICTURE -->
+                                @if (!string.IsNullOrEmpty(driver.ProfilePictureUrl))
+                                {
+                                    <img src="@driver.ProfilePictureUrl" class="img-fluid rounded-circle mb-3" alt="Photo du chauffeur" width="150" height="150">
+                                }
+                                else
+                                {
+                                    <img src="/images/default-avatar.png" class="img-fluid rounded-circle mb-3" alt="Photo par défaut" width="150" height="150">
+                                }
+
+                                <p><strong>Nom :</strong> @driver.User.FirstName @driver.User.LastName</p>
+                                <p><strong>Email :</strong> @driver.User.Email</p>
+                                <p><strong>Téléphone :</strong> @driver.User.PhoneNumber</p>
+                                <p><strong>Date de naissance :</strong> @(driver.DateOfBirth?.ToString("dd/MM/yyyy") ?? "Non renseigné")</p>
+                                <p><strong>Numéro de permis :</strong> @(driver.LicenseNumber ?? "Non renseigné")</p>
+                                <p><strong>Expiration permis :</strong> @(driver.LicenseExpiration?.ToString("dd/MM/yyyy") ?? "Non renseigné")</p>
+                                <p><strong>Adresse :</strong> @(driver.Address ?? "Non renseignée")</p>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <p class="text-warning">Aucune demande en attente.</p>
+}

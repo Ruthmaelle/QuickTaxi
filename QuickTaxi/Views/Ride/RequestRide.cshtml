@@ -1,0 +1,286 @@
+﻿@model QuickTaxi.ViewModels.RideRequestViewModel
+
+@{
+    ViewData["Title"] = "Demander une course";
+    var now = DateTime.Now.ToString("yyyy-MM-ddTHH:mm");
+}
+
+
+@if (TempData["SuccessMessage"] != null)
+{
+    <div class="alert alert-success">@TempData["SuccessMessage"]</div>
+}
+@if (TempData["ErrorMessage"] != null)
+{
+    <div class="alert alert-danger">@TempData["ErrorMessage"]</div>
+}
+
+
+
+<h2>Demander une Course</h2>
+
+<link href="https://api.mapbox.com/mapbox-gl-js/v2.13.0/mapbox-gl.css" rel="stylesheet" />
+<link href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.7.2/mapbox-gl-geocoder.css" rel="stylesheet" />
+<script src="https://api.mapbox.com/mapbox-gl-js/v2.13.0/mapbox-gl.js"></script>
+<script src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.7.2/mapbox-gl-geocoder.min.js"></script>
+
+
+<style>
+    #map {
+        width: 100%;
+        height: 400px;
+        margin-bottom: 20px;
+    }
+</style>
+
+<div class="card p-4">
+    <form asp-action="RequestRide" method="post">
+        <div class="mb-3 d-flex align-items-end justify-content-between gap-2">
+            <div class="flex-fill">
+                <label>Adresse de départ</label>
+                <div id="pickup-geocoder" class="mb-2"></div>
+                <input type="hidden" id="pickup" asp-for="PickupAddress" />
+            </div>
+            <div class="text-center">
+                <button type="button" class="btn btn-outline-secondary" onclick="swapAddresses()">↔</button>
+            </div>
+            <div class="flex-fill">
+                <label>Adresse de destination</label>
+                <div id="destination-geocoder" class="mb-2"></div>
+                <input type="hidden" id="destination" asp-for="DestinationAddress" />
+            </div>
+        </div>
+
+        <div id="map"></div>
+
+        <!-- ✅ Champ de planification corrigé -->
+        <div class="form-group">
+            <label for="ScheduledDate">Planifier une course (optionnel)</label>
+            <input asp-for="ScheduledDate" class="form-control" type="datetime-local" min="@now" />
+            <small class="form-text text-muted">Laissez vide pour une course immédiate.</small>
+            <span asp-validation-for="ScheduledDate" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label for="vehicleType">Type de véhicule</label>
+            <select id="vehicleType" name="RateId" class="form-select" required>
+                @foreach (var rate in Model.AvailableRates ?? new List<QuickTaxi.Models.Rate>())
+                {
+                    <option value="@rate.IdTarification" data-multiplier="@rate.Multiplier">
+                        @rate.NomTarification
+                    </option>
+                }
+            </select>
+        </div>
+
+        <div class="mb-3">
+            <label for="payment">Méthode de paiement</label>
+            <select id="payment" name="PaymentMethod" class="form-select" required>
+                <option value="Card">Carte</option>
+                <option value="Paypal">Paypal</option>
+                <option value="Cash">Espèces</option>
+            </select>
+        </div>
+
+        <input type="hidden" asp-for="PickupLatitude" />
+        <input type="hidden" asp-for="PickupLongitude" />
+        <input type="hidden" asp-for="DestinationLatitude" />
+        <input type="hidden" asp-for="DestinationLongitude" />
+        <input type="hidden" asp-for="DistanceKm" />
+
+
+        <p id="priceDisplay" class="text-primary fw-bold">💡 Prix estimé : - <small>(à titre indicatif)</small></p>
+
+        <div class="border p-3 mb-3 bg-light" id="rideSummary" style="display:none;">
+            <h5>Résumé de la course</h5>
+            <p><strong>Adresse de départ :</strong> <span id="summaryPickup"></span></p>
+            <p><strong>Adresse de destination :</strong> <span id="summaryDestination"></span></p>
+            <p><strong>Distance estimée :</strong> <span id="summaryDistance"></span> km</p>
+            <p><strong>Prix estimé :</strong> <span id="summaryPrice"></span> $</p>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Réserver</button>
+    </form>
+</div>
+
+<script>
+    mapboxgl.accessToken = 'pk.eyJ1IjoicnV0aG1hZWxsZSIsImEiOiJjbThrb2x5a3Awdmk0MmtweGhkenY4aGJvIn0.pq1bbh_n7gp93w2fX0OtvQ';
+
+    const map = new mapboxgl.Map({
+        container: 'map',
+        style: 'mapbox://styles/mapbox/streets-v12',
+        center: [-73.56, 45.5],
+        zoom: 12
+    });
+
+    let pickupCoord, destCoord, startMarker, endMarker;
+    let countryCode = 'ca';
+
+    function addDraggableMarker(coords, color, onDragEnd) {
+        return new mapboxgl.Marker({ draggable: true, color })
+            .setLngLat(coords)
+            .addTo(map)
+            .on('dragend', onDragEnd);
+    }
+
+    function swapAddresses() {
+        const pickup = document.getElementById("pickup").value;
+        const dest = document.getElementById("destination").value;
+        document.getElementById("pickup").value = dest;
+        document.getElementById("destination").value = pickup;
+
+        [pickupCoord, destCoord] = [destCoord, pickupCoord];
+
+        if (startMarker && endMarker) {
+            const tempPos = startMarker.getLngLat();
+            startMarker.setLngLat(endMarker.getLngLat());
+            endMarker.setLngLat(tempPos);
+        }
+
+        updateRouteAndPrice();
+    }
+
+    function getSelectedMultiplier() {
+        const selectedOption = document.querySelector("#vehicleType option:checked");
+        return parseFloat(selectedOption?.dataset.multiplier) || 2;
+    }
+
+    async function updateRouteAndPrice() {
+        if (!pickupCoord || !destCoord) return;
+
+        if (map.getSource('route')) {
+            map.removeLayer('route');
+            map.removeSource('route');
+        }
+
+        const res = await fetch(`https://api.mapbox.com/directions/v5/mapbox/driving/${pickupCoord[0]},${pickupCoord[1]};${destCoord[0]},${destCoord[1]}?geometries=geojson&access_token=${mapboxgl.accessToken}`);
+        const data = await res.json();
+        const route = data.routes[0];
+
+        const distanceKm = route.distance / 1000;
+        const multiplier = getSelectedMultiplier();
+        const estimatedPrice = (distanceKm * multiplier).toFixed(2);
+
+        map.addSource('route', { type: 'geojson', data: route.geometry });
+        map.addLayer({
+            id: 'route',
+            type: 'line',
+            source: 'route',
+            layout: { 'line-join': 'round', 'line-cap': 'round' },
+            paint: { 'line-color': '#007bff', 'line-width': 4 }
+        });
+
+        map.fitBounds([pickupCoord, destCoord], { padding: 100 });
+
+        document.getElementById("DistanceKm").value = distanceKm.toFixed(2);
+        document.getElementById("PickupLatitude").value = pickupCoord[1];
+        document.getElementById("PickupLongitude").value = pickupCoord[0];
+        document.getElementById("DestinationLatitude").value = destCoord[1];
+        document.getElementById("DestinationLongitude").value = destCoord[0];
+
+        document.getElementById("priceDisplay").innerHTML = `💡 Prix estimé : ${estimatedPrice} $ <small>(selon distance et type de véhicule)</small>`;
+
+        document.getElementById("summaryPickup").innerText = document.getElementById("pickup").value;
+        document.getElementById("summaryDestination").innerText = document.getElementById("destination").value;
+        document.getElementById("summaryDistance").innerText = distanceKm.toFixed(2);
+        document.getElementById("summaryPrice").innerText = estimatedPrice;
+        document.getElementById("rideSummary").style.display = "block";
+    }
+
+    function initGeocoders() {
+        const pickupGeocoder = new MapboxGeocoder({
+            accessToken: mapboxgl.accessToken,
+            placeholder: "Adresse de départ",
+            mapboxgl: mapboxgl,
+            marker: false,
+            countries: countryCode,
+            language: "fr"
+        });
+        pickupGeocoder.addTo('#pickup-geocoder');
+        pickupGeocoder.on('result', (e) => {
+            pickupCoord = e.result.geometry.coordinates;
+            document.getElementById("pickup").value = e.result.place_name;
+            if (startMarker) startMarker.remove();
+            startMarker = addDraggableMarker(pickupCoord, 'green', async () => {
+                pickupCoord = startMarker.getLngLat().toArray();
+                document.getElementById("pickup").value = await getAddressFromCoord(pickupCoord);
+                updateRouteAndPrice();
+            });
+            updateRouteAndPrice();
+        });
+
+        const destGeocoder = new MapboxGeocoder({
+            accessToken: mapboxgl.accessToken,
+            placeholder: "Adresse de destination",
+            mapboxgl: mapboxgl,
+            marker: false,
+            countries: countryCode,
+            language: "fr"
+        });
+        destGeocoder.addTo('#destination-geocoder');
+        destGeocoder.on('result', (e) => {
+            destCoord = e.result.geometry.coordinates;
+            document.getElementById("destination").value = e.result.place_name;
+            if (endMarker) endMarker.remove();
+            endMarker = addDraggableMarker(destCoord, 'red', async () => {
+                destCoord = endMarker.getLngLat().toArray();
+                document.getElementById("destination").value = await getAddressFromCoord(destCoord);
+                updateRouteAndPrice();
+            });
+            updateRouteAndPrice();
+        });
+    }
+
+    window.onload = () => {
+        const pickup = document.getElementById("pickup").value;
+        const dest = document.getElementById("destination").value;
+
+        if (pickup && dest) {
+            Promise.all([
+                fetch(`https://api.mapbox.com/geocoding/v5/mapbox.places/${encodeURIComponent(pickup)}.json?access_token=${mapboxgl.accessToken}`),
+                fetch(`https://api.mapbox.com/geocoding/v5/mapbox.places/${encodeURIComponent(dest)}.json?access_token=${mapboxgl.accessToken}`)
+            ])
+                .then(responses => Promise.all(responses.map(r => r.json())))
+                .then(data => {
+                    const pickupData = data[0].features[0];
+                    const destData = data[1].features[0];
+
+                    if (pickupData && destData) {
+                        pickupCoord = pickupData.geometry.coordinates;
+                        destCoord = destData.geometry.coordinates;
+
+                        startMarker = addDraggableMarker(pickupCoord, 'green', () => { });
+                        endMarker = addDraggableMarker(destCoord, 'red', () => { });
+
+                        updateRouteAndPrice();
+                    }
+                });
+        }
+
+        initGeocoders();
+    };
+
+    async function getAddressFromCoord(coord) {
+        const res = await fetch(`https://api.mapbox.com/geocoding/v5/mapbox.places/${coord[0]},${coord[1]}.json?access_token=${mapboxgl.accessToken}`);
+        const data = await res.json();
+        return data.features[0]?.place_name || '';
+    }
+
+    navigator.geolocation.getCurrentPosition(async function (position) {
+        const lat = position.coords.latitude;
+        const lon = position.coords.longitude;
+        const res = await fetch(`https://api.mapbox.com/geocoding/v5/mapbox.places/${lon},${lat}.json?access_token=${mapboxgl.accessToken}`);
+        const data = await res.json();
+        const context = data.features[0]?.context || [];
+        const country = context.find(c => c.id.startsWith("country"));
+        if (country?.short_code) {
+            countryCode = country.short_code;
+            document.getElementById("pickup-geocoder").innerHTML = "";
+            document.getElementById("destination-geocoder").innerHTML = "";
+            initGeocoders();
+        }
+    });
+
+    document.getElementById("vehicleType").addEventListener("change", updateRouteAndPrice);
+    //initGeocoders();
+</script>

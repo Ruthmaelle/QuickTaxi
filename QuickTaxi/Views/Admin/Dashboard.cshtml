@@ -1,0 +1,44 @@
+﻿@{
+    ViewData["Title"] = "Tableau de bord Admin";
+}
+
+<h2 class="mb-4">📊 Tableau de bord - QuickTaxi</h2>
+
+<div class="row">
+    <div class="col-md-4">
+        <div class="card text-white bg-success mb-3">
+            <div class="card-body">
+                <h5 class="card-title">Courses terminées</h5>
+                <p class="card-text display-6">@ViewBag.CompletedRides</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <div class="card text-white bg-info mb-3">
+            <div class="card-body">
+                <h5 class="card-title">Prix moyen</h5>
+                <p class="card-text display-6">@String.Format("{0:C}", ViewBag.AvgPrice)</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <div class="card text-white bg-warning mb-3">
+            <div class="card-body">
+                <h5 class="card-title">Chauffeurs actifs</h5>
+                <p class="card-text display-6">@ViewBag.ActiveDrivers</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--div class="mt-5">
+    <h4>🎁 Récompenses passagers</h4>
+    <p>Consultez la liste complète des récompenses des utilisateurs :</p>
+    <a href="@Url.Action("ManageRewards", "Admin")" class="btn btn-outline-primary">Gérer les récompenses</a>
+</div-->
+
+<p class="text-muted mt-4">Mise à jour : @DateTime.Now.ToString("dd MMM yyyy à HH:mm")</p>
+
+

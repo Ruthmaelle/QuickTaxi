@@ -1,0 +1,149 @@
+﻿@{
+    ViewData["Title"] = "Accueil";
+}
+
+@if (TempData["WelcomeMessage"] != null)
+{
+    <div class="alert alert-success text-center">
+        <strong>@TempData["WelcomeMessage"]</strong>
+    </div>
+}
+
+@if (TempData["SuccessMessage"] != null)
+{
+    <div class="alert alert-success">@TempData["SuccessMessage"]</div>
+}
+@if (TempData["ErrorMessage"] != null)
+{
+    <div class="alert alert-danger">@TempData["ErrorMessage"]</div>
+}
+
+<!-- Mapbox CSS -->
+<link href="https://api.mapbox.com/mapbox-gl-js/v2.13.0/mapbox-gl.css" rel="stylesheet" />
+<link href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.7.2/mapbox-gl-geocoder.css" rel="stylesheet" />
+
+<!-- Mapbox JS -->
+<script src="https://api.mapbox.com/mapbox-gl-js/v2.13.0/mapbox-gl.js"></script>
+<script src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.7.2/mapbox-gl-geocoder.min.js"></script>
+
+<style>
+    .mapboxgl-ctrl-geocoder {
+        width: 100% !important;
+        max-width: 100% !important
+        border-radius: 8px;
+        font-size: 15px;
+        box-shadow: none;
+    }
+
+    .mapboxgl-ctrl-geocoder--input {
+        padding: 10px 12px;
+        border: none !important;
+        outline: none;
+        width: 100%;
+    }
+
+    .mapboxgl-ctrl-geocoder--suggestion {
+        font-size: 14px;
+    }
+
+    .mapboxgl-ctrl-geocoder--suggestion-title {
+        font-weight: 600;
+        color: #333;
+    }
+
+    .mapboxgl-ctrl-geocoder--suggestion-address {
+        font-size: 13px;
+        color: #6c757d;
+    }
+
+    .mapboxgl-ctrl-geocoder--suggestions {
+        border-radius: 0 0 8px 8px;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+
+    .hero-section {
+        background: linear-gradient(145deg, #f2f2f2, #d9d9d9);
+        padding: 80px 0;
+        text-align: center;
+    }
+
+    .hero-content {
+        max-width: 520px;
+        margin: 0 auto;
+        background-color: grey;
+        padding: 35px;
+        border-radius: 12px;
+        box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+    }
+
+
+    .promo-section {
+        padding: 40px 20px;
+        text-align: center;
+    }
+</style>
+
+
+
+<!-- HERO SECTION -->
+<div class="hero-section">
+    <div class="hero-content">
+        <h2 class="mb-4 fw-bold">🚕 Réservez un taxi maintenant</h2>
+
+        <form method="get" asp-controller="Ride" asp-action="RequestRide">
+            <div class="mb-3 text-start">
+                <label class="form-label">📍 Adresse de départ</label>
+                <div id="pickup-geocoder" class="mb-2"></div>
+                <input type="hidden" id="pickup" name="pickup" />
+            </div>
+            <div class="mb-3 text-start">
+                <label class="form-label">📍 Adresse de destination</label>
+                <div id="destination-geocoder" class="mb-2"></div>
+                <input type="hidden" id="destination" name="destination" />
+            </div>
+            <div class="d-flex justify-content-center gap-3">
+                <button type="submit" class="btn btn-dark">Démarrer</button>
+                <a href="#" class="btn btn-outline-dark">Planifier</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- PROMO SECTION -->
+<div class="promo-section">
+    <h3 class="fw-bold">QuickTaxi, votre service de transport sécurisé</h3>
+    <p>Une plateforme moderne pour gérer vos trajets en toute simplicité et sécurité.</p>
+    <a class="btn btn-dark" asp-controller="Ride" asp-action="RequestRide">Réservez maintenant</a>
+</div>
+
+<script>
+    mapboxgl.accessToken = 'pk.eyJ1IjoicnV0aG1hZWxsZSIsImEiOiJjbThrb2x5a3Awdmk0MmtweGhkenY4aGJvIn0.pq1bbh_n7gp93w2fX0OtvQ';
+
+    const pickupGeocoder = new MapboxGeocoder({
+        accessToken: mapboxgl.accessToken,
+        placeholder: "Adresse de départ",
+        mapboxgl: mapboxgl,
+        marker: false,
+        language: "fr",
+        countries: "ca"
+    });
+
+    pickupGeocoder.addTo('#pickup-geocoder');
+    pickupGeocoder.on('result', function (e) {
+        document.getElementById("pickup").value = e.result.place_name;
+    });
+
+    const destinationGeocoder = new MapboxGeocoder({
+        accessToken: mapboxgl.accessToken,
+        placeholder: "Adresse de destination",
+        mapboxgl: mapboxgl,
+        marker: false,
+        language: "fr",
+        countries: "ca"
+    });
+
+    destinationGeocoder.addTo('#destination-geocoder');
+    destinationGeocoder.on('result', function (e) {
+        document.getElementById("destination").value = e.result.place_name;
+    });
+</script>

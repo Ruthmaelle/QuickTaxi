@@ -1,0 +1,27 @@
+﻿@model List<QuickTaxi.Models.Reward>
+
+@{
+    ViewBag.Title = "Gestion des récompenses";
+}
+
+<h2 class="mb-4">🏅 Gestion des récompenses</h2>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>👤 Utilisateur</th>
+            <th>✨ Points totaux</th>
+            <th>🕒 Dernière mise à jour</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var reward in Model)
+        {
+            <tr>
+                <td>@reward.User?.FirstName @reward.User?.LastName</td>
+                <td>@reward.PointsCount</td>
+                <td>@reward.LastUpdated.ToLocalTime().ToString("dd MMM yyyy à HH:mm")</td>
+            </tr>
+        }
+    </tbody>
+</table>

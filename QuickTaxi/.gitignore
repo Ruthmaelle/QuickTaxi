@@ -1,0 +1,39 @@
+# Visual Studio
+.vs/
+*.user
+*.suo
+
+# Build Results
+bin/
+obj/
+
+# ASP.NET temporary files
+**/App_Data/
+**/App_Start/
+**/Properties/
+
+# NuGet
+*.nupkg
+*.snupkg
+.nuget/
+packages/
+project.lock.json
+project.fragment.lock.json
+artifacts/
+
+# Rider
+.idea/
+
+# User-specific files
+*.sln.docstates
+
+# Logs
+*.log
+
+# System files
+.DS_Store
+Thumbs.db
+
+# Git
+.gitignore
+*.lock

@@ -1,0 +1,51 @@
+﻿@model QuickTaxi.ViewModels.VerifyCodeViewModel
+
+
+
+<h2>Confirmez votre Code</h2>
+@if (TempData["SuccessMessage"] != null)
+{
+    <div class="alert alert-success">@TempData["SuccessMessage"]</div>
+}
+@if (TempData["ErrorMessage"] != null)
+{
+    <div class="alert alert-danger">@TempData["ErrorMessage"]</div>
+}
+
+@if (Model.IsSmsVerification)
+{
+    <p>Un code a été envoyé à votre téléphone : <strong>@(Model.PhoneNumber ?? "Aucune donnée")</strong> (Valable pour 10min)</p>
+}
+else
+{
+    <p>Un code a été envoyé à votre email : <strong>@(Model.Email ?? "Aucune donnée")</strong> Valable pour 10min</p>
+}
+
+<div asp-validation-summary="All" class="text-danger"></div>
+
+
+
+<form asp-action="VerifyCode" asp-controller="Auth" method="post">
+    @Html.AntiForgeryToken() <!-- Ensure CSRF token is included -->
+
+    <input type="hidden" asp-for="Email" />
+    <input type="hidden" asp-for="PhoneNumber" />
+    <input type="hidden" asp-for="IsSmsVerification" />
+
+    <div class="form-group">
+        <label>Entrez votre code de vérification</label>
+        <input asp-for="Code" class="form-control" required />
+    </div>
+
+    <p>DEBUG: Code entré : <strong>@Model.Code</strong></p>
+
+
+    <button type="submit" class="btn btn-primary mt-3">Vérifier</button>
+</form>
+
+@{
+    Console.WriteLine($"📌 DEBUG : Model.Email = {Model?.Email}");
+    Console.WriteLine($"📌 DEBUG : Model.PhoneNumber = {Model?.PhoneNumber}");
+    Console.WriteLine($"📌 DEBUG : Model.IsSmsVerification = {Model?.IsSmsVerification}");
+    Console.WriteLine($"📌 DEBUG : Model.Code = {Model?.Code}");
+}

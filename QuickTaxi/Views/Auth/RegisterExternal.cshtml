@@ -1,0 +1,35 @@
+﻿@model QuickTaxi.ViewModels.RegisterExternalViewModel
+
+
+<h2>Finaliser votre inscription</h2>
+
+<form asp-action="RegisterExternal" method="post">
+    <div class="form-group">
+        <label>Prénom</label>
+        <input asp-for="FirstName" class="form-control" readonly />
+    </div>
+    <div class="form-group">
+        <label>Nom</label>
+        <input asp-for="LastName" class="form-control" readonly />
+    </div>
+    <div class="form-group">
+        <label>Email</label>
+        <input asp-for="Email" class="form-control" readonly />
+    </div>
+    <div class="form-group">
+        <label>Numéro de téléphone</label>
+        <input asp-for="PhoneNumber" class="form-control" placeholder="Entrez votre téléphone (optionnel)" />
+    </div>
+    <div class="form-group">
+        <label>Choisissez votre rôle</label>
+        <select asp-for="Role" class="form-control" required>
+            <option value="">-- Sélectionnez un rôle --</option>
+            <option value="Passenger">Passager</option>
+            <option value="Driver">Chauffeur</option>
+        </select>
+        <span asp-validation-for="Role" class="text-danger"></span>
+    </div>
+    <input type="hidden" asp-for="IsExternalLogin" />
+    <input type="hidden" asp-for="ReturnUrl" />
+    <button type="submit" class="btn btn-primary">Finaliser l'inscription</button>
+</form>

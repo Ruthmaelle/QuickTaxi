@@ -1,0 +1,140 @@
+﻿@model IEnumerable<QuickTaxi.Models.Ride>
+@{
+    ViewData["Title"] = "Mes Courses (Chauffeur)";
+}
+
+<h2 class="mb-4">🚖 Courses Assignées</h2>
+
+@if (TempData["SuccessMessage"] != null)
+{
+    <div class="alert alert-success">@TempData["SuccessMessage"]</div>
+}
+@if (TempData["ErrorMessage"] != null)
+{
+    <div class="alert alert-danger">@TempData["ErrorMessage"]</div>
+}
+@if (TempData["InfoMessage"] != null)
+{
+    <div class="alert alert-info">@TempData["InfoMessage"]</div>
+}
+
+@if (Model.Any())
+{
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>Date</th>
+                <th>Passager</th>
+                <th>Départ</th>
+                <th>Destination</th>
+                <th>Statut</th>
+                <th>Actions</th>
+                <th>Statut du Paiement</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var ride in Model)
+            {
+                <tr>
+                    <td>@ride.RideDate.ToString("dd/MM/yyyy HH:mm")</td>
+                    <td>@ride.Passenger?.FirstName @ride.Passenger?.LastName</td>
+                    <td>@ride.PickupAddress</td>
+                    <td>@ride.DestinationAddress</td>
+                    <td>
+                        @if (ride.Status == "Assigned")
+                        {
+                            <span class="badge bg-primary">🚖 Assigné</span>
+                        }
+                        else if (ride.Status == "Completed")
+                        {
+                            <span class="badge bg-success">✅ Terminé</span>
+                        }
+                        else
+                        {
+                            <span class="badge bg-secondary">🔁 Autre</span>
+                        }
+                    </td>
+                    <td>
+                        @if (ride.Status == "Assigned")
+                        {
+                            <form asp-action="StartTracking" method="post" asp-controller="Ride">
+                                <input type="hidden" name="rideId" value="@ride.RideId" />
+                                <button type="submit" class="btn btn-sm btn-warning">Démarrer la course</button>
+                            </form>
+
+                        }
+                        @if (ride.Status == "Completed" && ride.PaymentMethod.ToLower() == "cash" && ride.PaymentStatus != "Paid")
+                        {
+                            <form asp-controller="Payment" asp-action="ConfirmCash" method="post" class="d-inline">
+                                <input type="hidden" name="rideId" value="@ride.RideId" />
+                                <button type="submit" class="btn btn-sm btn-warning">
+                                    💵 Paiement reçu
+                                </button>
+                            </form>
+                        }
+                        @if (ride.Status =="Completed" && ride.PaymentStatus == "Paid")
+                        {
+                           
+                            <button class="btn btn-sm btn-outline-dark" data-bs-toggle="modal" data-bs-target="#receiptModal-@ride.RideId">
+                                📄 reçu
+                            </button>
+                        }
+                        else
+                        {
+                            <span class="text-muted">-</span>
+                        }
+                    </td>
+                    <td>
+                        @if (ride.Status == "Completed" && ride.PaymentMethod.ToLower() != "cash" && ride.PaymentStatus == "Paid")
+                        {
+                            <span>💵 @ride.PaymentStatus by @ride.PaymentMethod</span>
+                        }
+                        @if (ride.Status == "Completed" && ride.PaymentMethod.ToLower() == "cash" && ride.PaymentStatus == "Paid")
+                        {
+                            <span>💵 @ride.PaymentStatus in @ride.PaymentMethod </span>
+                        }
+                        else
+                        {
+                            <span> @ride.PaymentStatus</span>
+                        }
+                    </td>
+                </tr>
+            }
+
+            @foreach (var ride in Model)
+            {
+                if (ride.PaymentStatus == "Paid")
+                {
+                    <div class="modal fade" id="receiptModal-@ride.RideId" tabindex="-1" aria-labelledby="receiptModalLabel-@ride.RideId" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="receiptModalLabel-@ride.RideId">Résumé du reçu</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fermer"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <p><strong>Date :</strong> @ride.RideDate.ToLocalTime().ToString("dd MMM yyyy à HH:mm")</p>
+                                    <p><strong>Départ :</strong> @ride.PickupAddress</p>
+                                    <p><strong>Destination :</strong> @ride.DestinationAddress</p>
+                                    <p><strong>Montant payé :</strong> @ride.EstimatedPrice $</p>
+                                    <p><strong>Méthode :</strong> @ride.PaymentMethod</p>
+                                </div>
+                                <div class="modal-footer">
+                                    <a href="@Url.Action("Receipt", "Payment", new { rideId = ride.RideId })" class="btn btn-primary">
+                                        📄 Télécharger le reçu PDF pour plus d'infos
+                                    </a>
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <p>Aucune course assignée pour le moment.</p>
+}
+

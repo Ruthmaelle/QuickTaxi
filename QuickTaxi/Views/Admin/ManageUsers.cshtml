@@ -1,0 +1,91 @@
+﻿@model List<QuickTaxi.ViewModels.UserWithRolesViewModel>
+
+@{
+    ViewData["Title"] = "Gestion des utilisateurs";
+}
+
+<h2 class="mb-4">Gestion des utilisateurs</h2>
+
+<form method="get" asp-action="ManageUsers">
+    <div class="row mb-3">
+        <div class="col-md-3">
+            <select name="role" class="form-select" onchange="this.form.submit()">
+                <option value="">Tous les rôles</option>
+                <option value="Admin" selected="@(Context.Request.Query["role"] == "Admin" ? "selected" : null)">Admins</option>
+                <option value="Driver" selected="@(Context.Request.Query["role"] == "Driver" ? "selected" : null)">Chauffeurs</option>
+                <option value="Passenger" selected="@(Context.Request.Query["role"] == "Passenger" ? "selected" : null)">Passagers</option>
+            </select>
+        </div>
+        <div class="col-md-3">
+            <input type="text" name="search" class="form-control" placeholder="Rechercher par nom ou email" value="@Context.Request.Query["search"]" />
+        </div>
+        <div class="col-md-3">
+            <select name="sort" class="form-select" onchange="this.form.submit()">
+                <option value="date_desc">Date de création (plus récent)</option>
+                <option value="date_asc" selected="@(Context.Request.Query["sort"] == "date_asc" ? "selected" : null)">Date de création (plus ancien)</option>
+            </select>
+        </div>
+        <div class="col-md-3">
+            <button type="submit" class="btn btn-primary">Filtrer</button>
+        </div>
+    </div>
+</form>
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Nom</th>
+            <th>Email</th>
+            <th>Téléphone</th>
+            <th>Rôle(s)</th>
+            <th>Date de création</th>
+            <th>Statut</th>
+            <th>Courses</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var user in Model)
+        {
+            <tr>
+                <td>@user.FullName</td>
+                <td>@user.Email</td>
+                <td>@user.PhoneNumber</td>
+                <td>@string.Join(", ", user.Roles)</td>
+                <td>@user.CreatedAt.ToString("dd MMM yyyy")</td>
+                <td>
+                    @if (user.IsSuspended)
+                    {
+                        <span class="badge bg-warning text-dark">Suspendu</span>
+                    }
+                    else
+                    {
+                        <span class="badge bg-success">Actif</span>
+                    }
+                </td>
+
+                <td>@user.TotalRides</td>
+                <td>
+                    @if (!user.Roles.Contains("Admin"))
+                    {
+                        <div class="d-flex gap-2">
+                            <form asp-action="ToggleSuspension" asp-route-id="@user.Id" method="post">
+                                <button class="btn btn-sm @(user.IsSuspended ? "btn-success" : "btn-warning")">
+                                    @(user.IsSuspended ? "Réactiver" : "Suspendre")
+                                </button>
+                            </form>
+                            <form asp-action="DeleteUser" asp-route-id="@user.Id" method="post" onsubmit="return confirm('Supprimer cet utilisateur ?');">
+                                <button class="btn btn-sm btn-danger">Supprimer</button>
+                            </form>
+                        </div>
+                    }
+                    else
+                    {
+                        <span class="text-muted">Admin protégé</span>
+                    }
+                </td>
+
+            </tr>
+        }
+    </tbody>
+</table>

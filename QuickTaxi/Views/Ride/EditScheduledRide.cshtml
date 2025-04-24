@@ -1,0 +1,51 @@
+﻿@model QuickTaxi.Models.Ride
+
+@{
+    ViewData["Title"] = "Modifier la course planifiée";
+    var now = DateTime.Now.ToString("yyyy-MM-ddTHH:mm");
+}
+
+<h2 class="mb-4">Modifier la course planifiée</h2>
+
+<form asp-action="EditScheduledRide" method="post">
+    <input type="hidden" asp-for="RideId" />
+
+    <div class="form-group">
+        <label asp-for="PickupAddress">Adresse de départ</label>
+        <input asp-for="PickupAddress" class="form-control" />
+        <span asp-validation-for="PickupAddress" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="DestinationAddress">Adresse d'arrivée</label>
+        <input asp-for="DestinationAddress" class="form-control" />
+        <span asp-validation-for="DestinationAddress" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="PaymentMethod">Méthode de paiement</label>
+        <select asp-for="PaymentMethod" class="form-control">
+            <option value="Cash">Espèces</option>
+            <option value="Card">Carte</option>
+            <option value="PayPal">PayPal</option>
+        </select>
+        <span asp-validation-for="PaymentMethod" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="RateId">Tarification</label>
+        <select asp-for="RateId" asp-items="@(new SelectList(ViewBag.AvailableRates, "IdTarification", "NomTarification"))" class="form-control">
+            <option value="">-- Choisir une tarification --</option>
+        </select>
+        <span asp-validation-for="RateId" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label for="ScheduledDate">Nouvelle date planifiée</label>
+        <input asp-for="ScheduledDate" class="form-control" type="datetime-local" min="@now" />
+        <span asp-validation-for="ScheduledDate" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-primary mt-3">Mettre à jour</button>
+    <a asp-action="MyRides" class="btn btn-secondary mt-3">Annuler</a>
+</form>

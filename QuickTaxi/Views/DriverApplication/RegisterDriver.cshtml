@@ -1,0 +1,161 @@
+﻿@model QuickTaxi.ViewModels.DriverRegistrationViewModel
+
+<h2>🚖 Devenir Chauffeur</h2>
+@if (TempData["SuccessMessage"] != null)
+{
+    <div class="alert alert-success">@TempData["SuccessMessage"]</div>
+}
+@if (TempData["ErrorMessage"] != null)
+{
+    <div class="alert alert-danger">@TempData["ErrorMessage"]</div>
+}
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const allowedImages = ["image/jpeg", "image/png"];
+        const allowedDocs = ["application/pdf", "application/msword",
+            "application/vnd.openxmlformats-officedocument.wordprocessingml.document"];
+
+        function validateFile(input, allowedTypes) {
+            if (input.files.length > 0) {
+                const fileType = input.files[0].type;
+                if (!allowedTypes.includes(fileType)) {
+                    alert("Type de fichier non autorisé !");
+                    input.value = "";
+                }
+            }
+        }
+
+        document.getElementById("ProfilePicture").addEventListener("change", function () {
+            validateFile(this, allowedImages);
+        });
+
+        document.getElementById("LicenseDocument").addEventListener("change", function () {
+            validateFile(this, allowedDocs);
+        });
+
+        document.getElementById("InsuranceDocument").addEventListener("change", function () {
+            validateFile(this, allowedDocs);
+        });
+    });
+</script>
+
+
+
+
+<form asp-action="RegisterDriver" asp-controller="DriverApplication" method="post" enctype="multipart/form-data">
+    @Html.AntiForgeryToken()
+    <!-- First Name -->
+    <div class="mb-3">
+        <label for="FirstName" class="form-label">Prénom</label>
+        <input type="text" class="form-control" id="FirstName" name="FirstName" value="@Model.FirstName" readonly>
+        <span class="text-danger" asp-validation-for="FirstName"></span>
+    </div>
+
+    <!-- Last Name -->
+    <div class="mb-3">
+        <label for="LastName" class="form-label">Nom</label>
+        <input type="text" class="form-control" id="LastName" name="LastName" value="@Model.LastName" readonly>
+        <span class="text-danger" asp-validation-for="LastName"></span>
+    </div>
+
+    <!-- Phone Number -->
+    <div class="mb-3">
+        <label for="PhoneNumber" class="form-label">Téléphone</label>
+        <input type="text" class="form-control" id="PhoneNumber" name="PhoneNumber" value="@Model.PhoneNumber" readonly>
+    </div>
+
+
+    <div class="mb-3">
+        <label for="DateOfBirth" class="form-label">Date de Naissance</label>
+        <input type="date" asp-for="DateOfBirth" class="form-control" required value="@DateTime.Now.Year" max="@DateTime.Now.ToString("yyyy-MM-dd")" />
+        <span asp-validation-for="DateOfBirth" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label for="LicenseNumber" class="form-label">Numéro de Permis</label>
+        <input type="text" asp-for="LicenseNumber" class="form-control" required />
+        <span asp-validation-for="LicenseNumber" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label for="LicenseExpiration" class="form-label">Expiration du Permis</label>
+        <input type="date" asp-for="LicenseExpiration" class="form-control" required min="@DateTime.Now.ToString("yyyy-MM-dd")" />
+        <span asp-validation-for="LicenseExpiration" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label for="Address" class="form-label">Adresse</label>
+        <input type="text" asp-for="Address" class="form-control" required />
+        <span asp-validation-for="Address" class="text-danger"></span>
+    </div>
+
+    <h4>🚗 Informations du Véhicule</h4>
+
+    <!-- Vehicle Make -->
+    <div class="mb-3">
+        <label for="VehicleMake" class="form-label">Marque du Véhicule</label>
+        <input type="text" asp-for="VehicleMake" class="form-control" required />
+        <span class="text-danger" asp-validation-for="VehicleMake"></span>
+    </div>
+
+    <!-- Vehicle Model -->
+    <div class="mb-3">
+        <label for="VehicleModel" class="form-label">Modèle</label>
+        <input type="text" asp-for="VehicleModel" class="form-control" required />
+        <span class="text-danger" asp-validation-for="VehicleModel"></span>
+    </div>
+
+    <!-- Vehicle Color -->
+    <div class="mb-3">
+        <label for="VehicleColor" class="form-label">Couleur du Véhicule</label>
+        <input type="text" asp-for="VehicleColor" class="form-control" required />
+        <span class="text-danger" asp-validation-for="VehicleColor"></span>
+    </div>
+
+    <!-- Vehicle Year -->
+    <div class="mb-3">
+        <label for="VehicleYear" class="form-label">Année</label>
+        <input asp-for="VehicleYear" class="form-control" type="number" min="1990" max="@DateTime.Now.Year" required value="@DateTime.Now.Year" />
+        <span class="text-danger" asp-validation-for="VehicleYear"></span>
+    </div>
+
+    <!-- Vehicle Registration Number -->
+    <div class="mb-3">
+        <label for="VehicleRegistrationNumber" class="form-label">Numéro d'Immatriculation</label>
+        <input type="text" asp-for="VehicleRegistrationNumber" class="form-control" required />
+        <span class="text-danger" asp-validation-for="VehicleRegistrationNumber"></span>
+    </div>
+
+    <h4>📑 Documents</h4>
+
+    <!-- License Document -->
+    <div class="mb-3">
+        <label for="LicenseDocument" class="form-label">📎 Upload Permis de Conduire</label>
+        <input type="file" name="LicenseDocument" class="form-control" accept=".pdf,.doc,.docx"  required />
+        <span class="text-danger">@(TempData["LicenseDocumentError"] ?? "")</span>
+    </div>
+
+    <!-- Insurance Document -->
+    <div class="mb-3">
+        <label for="InsuranceDocument" class="form-label">📎 Upload Assurance</label>
+        <input type="file" name="InsuranceDocument" class="form-control" accept=".pdf,.doc,.docx"  required />
+        <span class="text-danger">@(TempData["InsuranceDocumentError"] ?? "")</span>
+    </div>
+
+    <!-- Profil Picture -->
+    <div class="mb-3">
+        <label for="ProfilePicture" class="form-label">📷 Upload Profile Picture</label>
+        <input type="file" name="ProfilePicture" class="form-control" accept=".jpg,.jpeg,.png"  required />
+        <span class="text-danger">@(TempData["ProfilePictureError"] ?? "")</span>
+    </div>
+
+
+    <button type="submit" class="btn btn-primary">Envoyer la Demande</button>
+</form>
+
+<!-- ✅ Enables client-side validation -->
+@section Scripts {
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/3.2.11/jquery.validate.unobtrusive.min.js"></script>
+}

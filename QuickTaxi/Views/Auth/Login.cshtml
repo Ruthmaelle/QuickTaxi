@@ -1,0 +1,49 @@
+﻿@model QuickTaxi.ViewModels.LoginViewModel
+
+
+
+<h2>Connexion</h2>
+
+@if (TempData["SuccessMessage"] != null)
+{
+    <div class="alert alert-success">@TempData["SuccessMessage"]</div>
+}
+@if (TempData["ErrorMessage"] != null)
+{
+    <div class="alert alert-danger">@TempData["ErrorMessage"]</div>
+}
+
+<form asp-action="Login" method="post">
+    <div asp-validation-summary="All" class="text-danger"></div>
+
+    <div>
+        <label>Email</label>
+        <input asp-for="Email" class="form-control" type="email" required />
+        <span asp-validation-for="Email" class="text-danger"></span>
+    </div>
+    <div>
+        <label>Mot de passe</label>
+        <input asp-for="Password" class="form-control" type="password" required />
+        <span asp-validation-for="Password" class="text-danger"></span>
+    </div>
+    <div class="form-check">
+        <input class="form-check-input" asp-for="RememberMe" />
+        <label class="form-check-label" asp-for="RememberMe">Se souvenir de moi</label>
+    </div>
+
+
+    <button type="submit" class="btn btn-primary">Se connecter</button>
+
+    <br />
+    <br />
+
+
+
+    <a asp-controller="Auth" asp-action="ExternalLogin" asp-route-provider="Google" class="btn btn-danger">Se connecter avec Google</a>
+    <!--a asp-controller="Auth" asp-action="ExternalLogin" asp-route-provider="Facebook" class="btn btn-primary">Se connecter avec Facebook</!--a>
+
+</form>
+
+
+
+

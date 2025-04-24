@@ -1,0 +1,85 @@
+﻿@model QuickTaxi.ViewModels.DriverReviewsViewModel
+@{
+    ViewData["Title"] = "Avis du Chauffeur";
+}
+
+
+<h2 class="mb-4">Avis sur @Model.Driver.FirstName @Model.Driver.LastName</h2>
+
+<div class="card mb-4 p-3 shadow-sm">
+    <div class="row g-0">
+        <div class="col-md-2">
+            <img src="@Model.Driver.ProfilePictureUrl" class="img-fluid rounded-circle" alt="Photo du chauffeur">
+        </div>
+        <div class="col-md-10">
+            <div class="card-body">
+                <h5 class="card-title">@Model.Driver.FirstName @Model.Driver.LastName</h5>
+                <p class="card-text">📍 @Model.Driver.PhoneNumber</p>
+                <p class="card-text"> Date of Birth: @Model.Driver.DateOfBirth</p>
+                <p class="card-text">🚗 @Model.Driver.VehicleRegistrationNumber</p>
+                <p class="card-text">
+                    <strong>Note moyenne :</strong>
+                    <span class="text-warning">
+                        @for (int i = 1; i <= 5; i++)
+                        {
+                            <i class="fa fa-star@(i <= Math.Round(Model.AverageRating) ? "" : "-o")"></i>
+                        }
+                    </span>
+                    (@Model.AverageRating.ToString("0.0") / 5)
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="form-group mb-4">
+    <label for="noteFilter">Filtrer par note :</label>
+    <select id="noteFilter" class="form-control" onchange="filterReviews()">
+        <option value="all">Toutes les notes</option>
+        <option value="5">5 étoiles</option>
+        <option value="4">4 étoiles</option>
+        <option value="3">3 étoiles</option>
+        <option value="2">2 étoiles</option>
+        <option value="1">1 étoile</option>
+    </select>
+</div>
+
+<div id="reviewList">
+    @foreach (var review in Model.Reviews)
+    {
+        <div class="card mb-3 review" data-rating="@review.Rating">
+            <div class="card-body">
+                <h5 class="card-title">
+                    @for (int i = 1; i <= 5; i++)
+                    {
+                        <i class="fa fa-star@(i <= review.Rating ? "" : "-o") text-warning"></i>
+                    }
+                </h5>
+                <p class="card-text">@review.Comment</p>
+                <p class="card-text">
+                    <small class="text-muted">
+                        @review.CreatedAt.ToString("dd MMM yyyy")
+                        — Course de @review.Ride.PickupAddress → @review.Ride.DestinationAddress
+                    </small>
+                </p>
+            </div>
+        </div>
+    }
+</div>
+
+@section Scripts {
+    <script>
+        function filterReviews() {
+            var selected = document.getElementById("noteFilter").value;
+            var reviews = document.querySelectorAll(".review");
+
+            reviews.forEach(function (r) {
+                if (selected === "all" || r.getAttribute("data-rating") === selected) {
+                    r.style.display = "block";
+                } else {
+                    r.style.display = "none";
+                }
+            });
+        }
+    </script>
+}

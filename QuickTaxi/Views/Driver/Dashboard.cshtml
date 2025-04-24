@@ -1,0 +1,135 @@
+﻿@using QuickTaxi.ViewModels
+@model DriverDashboardViewModel
+
+@{
+    ViewData["Title"] = "Tableau de bord - Chauffeur";
+}
+
+<div class="container mt-5">
+    <h2 class="mb-4">Bienvenue sur votre tableau de bord</h2>
+
+    <div class="row mb-4">
+        <div class="col-md-3">
+            <div class="card text-white bg-primary">
+                <div class="card-body">
+                    <h5 class="card-title">Courses totales</h5>
+                    <p class="display-6">@Model.TotalRides</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card text-white bg-success">
+                <div class="card-body">
+                    <h5 class="card-title">Gains totaux</h5>
+                    <p class="display-6">@Model.TotalEarnings.ToString("C")</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card text-white bg-warning">
+                <div class="card-body">
+                    <h5 class="card-title">Note moyenne</h5>
+                    <p class="display-6">@Model.AverageRating</p>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+
+    <a class="btn btn-outline-primary me-2" href="/Ride/DriverRides">📋 Mes courses</a>
+    <a class="btn btn-outline-secondary" href="/Ride/DriverReviews?driverId=@Model.Driver.DriverId">📝 Tous les avis</a>
+    <a class="btn btn-outline-secondary" asp-controller="Report" asp-action="Create">📣 Contacter l'Admin</a>
+
+
+
+    <h4 class="mt-5">Courses planifiées à venir</h4>
+    @if (Model.UpcomingRides.Any())
+    {
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>Passager</th>
+                    <th>Départ</th>
+                    <th>Destination</th>
+                    <th>Statut</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var ride in Model.UpcomingRides)
+                {
+                    <tr>
+                        <td>@ride.Date.ToLocalTime().ToString("dd MMM yyyy - HH:mm")</td>
+                        <td>@ride.PassengerName</td>
+                        <td>@ride.StartAddress</td>
+                        <td>@ride.Destination</td>
+                        <td>@ride.Status</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+    else
+    {
+        <p class="text-muted">Aucune course planifiée pour l'instant.</p>
+    }
+</div>
+
+<hr />
+<h4>Avis reçus</h4>
+
+@if (Model.Reviews != null && Model.Reviews.Any())
+{
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Passager</th>
+                <th>Note</th>
+                <th>Commentaire</th>
+                <th>Date</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var review in Model.Reviews)
+            {
+                <tr>
+                    <td>@(review.PassengerName ?? "Inconnu")</td>
+                    <td>
+                        @for (int i = 1; i <= 5; i++)
+                        {
+                            if (i <= review.Rating)
+                            {
+                                <span style="color: gold;">★</span>
+                            }
+                            else
+                            {
+                                <span style="color: lightgray;">★</span>
+                            }
+                        }
+                    </td>
+                    <td>@review.Comment</td>
+                    <td>@review.CreatedAt.ToString("dd MMM yyyy")</td>
+                </tr>
+            }
+
+            <select id="earningFilter" class="form-select w-auto mb-3">
+                <option value="day">Aujourd'hui</option>
+                <option value="week">Cette semaine</option>
+                <option value="month">Ce mois</option>
+            </select>
+
+            <div id="earningsReport">
+                <!-- Affichage des gains dynamiques ici -->
+            </div>
+
+        </tbody>
+
+   
+    </table>
+
+
+}
+else
+{
+    <p>Aucun avis reçu pour le moment.</p>
+}
