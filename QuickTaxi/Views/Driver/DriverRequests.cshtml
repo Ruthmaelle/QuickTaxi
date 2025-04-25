@@ -1,6 +1,6 @@
 ﻿@model List<QuickTaxi.Models.Driver>
 
-<h2>🚖 Demandes de Chauffeurs en Attente</h2>
+<h2>Demandes de Chauffeurs en Attente</h2>
 
 @if (Model != null && Model.Any())
 {
@@ -35,7 +35,7 @@
                         }
                         else
                         {
-                            <span class="text-danger">🚫 Aucun véhicule trouvé</span>
+                            <span class="text-danger"> Aucun véhicule trouvé</span>
                         }
                     </td>
 
@@ -52,17 +52,17 @@
                         {
                             <form asp-action="ApproveDriver" asp-controller="Profile" method="post" class="d-inline">
                                 <input type="hidden" name="driverId" value="@driver.DriverId" />
-                                <button type="submit" class="btn btn-success">✅ Approuver</button>
+                                <button type="submit" class="btn btn-success">Approuver</button>
                             </form>
 
                             <form asp-action="RejectDriver" asp-controller="Profile" method="post" class="d-inline">
                                 <input type="hidden" name="driverId" value="@driver.DriverId" />
-                                <button type="submit" class="btn btn-danger">❌ Refuser</button>
+                                <button type="submit" class="btn btn-danger">Refuser</button>
                             </form>
                         }
                         else
                         {
-                            <span class="badge bg-success">✅ Approuvé</span>
+                            <span class="badge bg-success"> Approuvé</span>
                         }
                     </td>
                 </tr>
@@ -89,7 +89,7 @@
                                 }
                                 else
                                 {
-                                    <p class="text-danger">🚫 Aucun véhicule trouvé</p>
+                                    <p class="text-danger"> Aucun véhicule trouvé</p>
                                 }
                             </div>
                             <div class="modal-footer">

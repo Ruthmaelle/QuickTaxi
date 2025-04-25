@@ -30,7 +30,7 @@
     <p><strong>Email :</strong> @Model.Email</p>
     <p><strong>Téléphone :</strong> @Model.PhoneNumber</p>
     <p>
-        <strong>Rôle :</strong>  <!-- ✅ Ajout du rôle -->
+        <strong>Rôle :</strong> 
         @if (Model.Roles != null && Model.Roles.Any())
         {
             <ul>
@@ -49,7 +49,7 @@
             <span>Aucun rôle attribué</span>
         }
 
-        @if (Model.Roles.Count > 1)// ✅ Afficher seulement si plusieurs rôle
+        @if (Model.Roles.Count > 1) //si plusieurs rôle
         {
             <h4>Supprimer un rôle</h4>
             <form asp-action="RemoveRole" asp-controller="Profile" method="post">
@@ -121,7 +121,7 @@
 
 @if (User.IsInRole("Admin"))
 {
-    <h3>🚖 Demandes de Chauffeurs en Attente</h3>
+    <h3> Demandes de Chauffeurs en Attente</h3>
     @if (Model.PendingDrivers != null && Model.PendingDrivers.Any())
     {
         <table class="table table-bordered">
@@ -144,7 +144,7 @@
                         <td>
                             @(driver.User != null ? driver.User.Email : "❌ Email inconnu")
                         </td>
-                        <!-- 🚗 Colonne Véhicule avec bouton Voir Plus -->
+                       
                         <td>
                             @if (driver.Vehicle != null)
                             {
@@ -157,14 +157,14 @@
                                 <span class="text-danger">🚫 Aucun véhicule trouvé</span>
                             }
                         </td>
-                        <!-- 👤 Colonne Statut avec bouton Voir Plus -->
+                     
                         <td>
                             <button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#detailsModal-@driver.DriverId">
                                 🔍 Voir Détails
                             </button>
                         <td>
 
-                            <!-- 🆕 MODALE VÉHICULE -->
+                           
                             <div class="modal fade" id="vehicleModal-@driver.DriverId" tabindex="-1" aria-labelledby="vehicleModalLabel-@driver.DriverId" aria-hidden="true">
                                 <div class="modal-dialog">
                                     <div class="modal-content">
@@ -186,7 +186,7 @@
                                                 }
                                                 else
                                                 {
-                                                <p class="text-danger">🚫 Aucun véhicule trouvé</p>
+                                                <p class="text-danger">Aucun véhicule trouvé</p>
                                                 }
                                         </div>
                                         <div class="modal-footer">
@@ -196,7 +196,6 @@
                                 </div>
                             </div>
 
-                            <!-- Fenêtre modale pour voir les détails -->
                             <div class="modal fade" id="detailsModal-@driver.DriverId" tabindex="-1" aria-labelledby="detailsModalLabel" aria-hidden="true">
                                 <div class="modal-dialog">
                                     <div class="modal-content">
@@ -206,7 +205,6 @@
                                         </div>
                                         <div class="modal-body text-center">
 
-                                            <!-- 🚀 AFFICHAGE DE LA PHOTO DE PROFIL -->
                                                 @if (!string.IsNullOrEmpty(driver.ProfilePictureUrl))
                                                 {
                                                 <img src="@driver.ProfilePictureUrl" class="img-fluid rounded-circle mb-3" alt="Photo du chauffeur" width="150" height="150">
@@ -232,11 +230,11 @@
                             </div>
                             @if (driver.IsApproved.GetValueOrDefault())
                             {
-                                <span class="badge bg-success">✅ Approuvé</span>
+                                <span class="badge bg-success"> Approuvé</span>
                             }
                             else
                             {
-                                <span class="badge bg-warning">⏳ En attente</span>
+                                <span class="badge bg-warning"> En attente</span>
                             }
                         </td>
                         <td>
@@ -244,7 +242,7 @@
                             {
                                 <form asp-action="ApproveDriver" asp-controller="Profile" method="post">
                                     <input type="hidden" name="driverId" value="@driver.DriverId" />
-                                    <button type="submit" class="btn btn-success">✅ Approuver</button>
+                                    <button type="submit" class="btn btn-success"> Approuver</button>
                                 </form>
                             }
                             else

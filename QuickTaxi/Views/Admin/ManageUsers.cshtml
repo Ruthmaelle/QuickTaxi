@@ -19,15 +19,7 @@
         <div class="col-md-3">
             <input type="text" name="search" class="form-control" placeholder="Rechercher par nom ou email" value="@Context.Request.Query["search"]" />
         </div>
-        <div class="col-md-3">
-            <select name="sort" class="form-select" onchange="this.form.submit()">
-                <option value="date_desc">Date de création (plus récent)</option>
-                <option value="date_asc" selected="@(Context.Request.Query["sort"] == "date_asc" ? "selected" : null)">Date de création (plus ancien)</option>
-            </select>
-        </div>
-        <div class="col-md-3">
-            <button type="submit" class="btn btn-primary">Filtrer</button>
-        </div>
+       
     </div>
 </form>
 

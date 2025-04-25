@@ -49,7 +49,7 @@
                 <td>
                     @if (ride.PaymentStatus == "Paid")
                     {
-                        <span class="text-success">✅ Payé</span>
+                        <span class="text-success"> Payé</span>
                     }
                     @if(ride.Status == "Cancelled")
                     {
@@ -57,14 +57,14 @@
                     }
                     @if ((ride.PaymentStatus != "Paid"))
                     {
-                        <span class="text-danger">⏳ Non payé</span>
+                        <span class="text-danger"> Non payé</span>
                     }
                 </td>
                 <td>
                     @if (ride.PaymentStatus == "Paid")
                     {
                         <a asp-controller="Admin" asp-action="Receipt" asp-route-rideId="@ride.RideId" class="btn btn-sm btn-outline-primary">
-                            📄 Voir le reçu
+                             Voir le reçu
                         </a>
                     }
                     else

@@ -4,7 +4,7 @@
     ViewData["Title"] = "Demandes de courses";
 }
 
-<h2 class="mb-4">📋 Demandes de courses</h2>
+<h2 class="mb-4"> Demandes de courses</h2>
 
 @if (TempData["SuccessMessage"] != null)
 {
@@ -20,13 +20,13 @@
     <table class="table table-bordered table-hover">
         <thead class="table-dark">
             <tr>
-                <th>🕒 Date</th>
-                <th>🚗 Passager</th>
-                <th>📍 Départ</th>
-                <th>🎯 Destination</th>
-                <th>📊 Statut</th>
-                <th>💵 Prix</th>
-                <th>👨‍✈️ Chauffeur</th>
+                <th> Date</th>
+                <th> Passager</th>
+                <th> Départ</th>
+                <th> Destination</th>
+                <th> Statut</th>
+                <th> Prix</th>
+                <th> Chauffeur</th>
                 <th>Actions</th>
             </tr>
         </thead>
@@ -81,7 +81,7 @@
                                     }
                                 </select>
                                 <br />
-                                <button type="submit" class="btn btn-sm btn-success">✅ Affecter Chauffeur</button>
+                                <button type="submit" class="btn btn-sm btn-success">Affecter un Chauffeur</button>
                             </form>
 
                             <form asp-action="RejectRide" asp-controller="Ride" method="post" class="d-inline">
