@@ -30,12 +30,11 @@ namespace QuickTaxi.Models
 
         public Setting Settings { get; set; }
 
-        // 🔴 Ajoute ceci pour que ASP.NET Identity fonctionne correctement
         public override string UserName { get; set; }
 
         // 2FA Fields
-        public string? VerificationCode { get; set; }   // Store the code
-        public DateTime? CodeExpiration { get; set; }  // Expiration time
+        public string? VerificationCode { get; set; }   
+        public DateTime? CodeExpiration { get; set; }
 
         public bool IsSuspended { get; set; } = false;
 

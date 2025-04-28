@@ -18,12 +18,12 @@ namespace QuickTaxi.Models
         [Required]
         [StringLength(100)]
         [Column("Subject")]
-        public string Subject { get; set; }  // Sujet ou type du signalement
+        public string Subject { get; set; }
 
         [Required]
         [StringLength(1000)]
         [Column("Message")]
-        public string Message { get; set; }  // Détails du signalement
+        public string Message { get; set; }  
 
         [DataType(DataType.DateTime)]
         [Column("CreatedAt")]

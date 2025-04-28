@@ -15,7 +15,6 @@ namespace QuickTaxi.Models
         [Column("user_id")]
         public string UserId { get; set; }
 
-        // 🔥 Correction ici : On fait bien référence à `User` et non `IdentityUser`
         public virtual User User { get; set; }
 
         [Column("first_name")]
@@ -32,7 +31,7 @@ namespace QuickTaxi.Models
         public decimal AverageRating { get; set; } = 0;
 
 
-        // ✅ Personal Information
+        // Personal Information
         [Required]
         [Column("date_of_birth")]
         [DataType(DataType.Date)]
@@ -55,7 +54,7 @@ namespace QuickTaxi.Models
         [Column("profile_picture_url")]
         public string ProfilePictureUrl { get; set; }
 
-        // ✅ Document Verification
+        // Document Verification
         [Required]
         [Column("vehicle_registration_number")]
         [StringLength(50)]
@@ -67,7 +66,7 @@ namespace QuickTaxi.Models
         [Column("license_document_url")]
         public string LicenseDocumentUrl { get; set; }
 
-        // ✅ Approval Status
+        // Approval Status
         [Column("is_approved")]
         public bool? IsApproved { get; set; } = false;
 
@@ -79,8 +78,8 @@ namespace QuickTaxi.Models
         public string Status { get; set; } = "Offline"; // Enum: "Available", "Busy", "Offline"
 
 
-        // ✅ Relationship with Vehicles (One-to-One)
-        public virtual Vehicle Vehicle { get; set; } // 🔥 Assurer que le `Driver` a bien un véhicule lié
+        //Relationship with Vehicles (One-to-One)
+        public virtual Vehicle Vehicle { get; set; }
 
 
         [NotMapped]

@@ -41,7 +41,7 @@ namespace QuickTaxi.Models
         [Column("license_plate")]
         public string LicensePlate { get; set; }
 
-        // ✅ Document Verification
+        // Document Verification
         [Required]
         [Column("vehicle_registration_number")]
         [StringLength(50)]
